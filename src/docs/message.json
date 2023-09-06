@@ -1,0 +1,226 @@
+[
+  {
+    "id": "64f5d9363039141440bbff77",
+    "type": "message.created",
+    "payload": {
+      "sourceType": "ACCOUNT",
+      "sourceId": 1797057,
+      "content": { "text": "ola", "richText": "ola" },
+      "channelMessageId": "1698687046263423019",
+      "channelType": "TWITTER",
+      "accountType": "TWITTER",
+      "channelCreatedTime": 1693833526565,
+      "senderProfile": {
+        "name": "Eduardo Augusto",
+        "channelType": "TWITTER",
+        "channelId": "1484616750549319682",
+        "permalink": "https://twitter.com/Eduardo52407750",
+        "avatarUrl": "https://pbs.twimg.com/profile_images/1484616824398434310/qzhy91xb.jpg",
+        "profileImageUrl": "https://pbs.twimg.com/profile_images/1484616824398434310/qzhy91xb_normal.jpg",
+        "bio": "",
+        "followers": 0,
+        "following": 3,
+        "username": "Eduardo52407750",
+        "verified": false,
+        "unSubscribed": false,
+        "deleted": false,
+        "snCreatedTime": 1642795208170,
+        "snModifiedTime": 1642795208170,
+        "statusCount": 0,
+        "accountSpecificInfos": [],
+        "additional": {},
+        "url": "https://twitter.com/Eduardo52407750"
+      },
+      "receiverProfile": {
+        "name": "Tabata Diniz",
+        "channelType": "TWITTER",
+        "channelId": "1112913232652587008",
+        "permalink": "https://twitter.com/DinizTabata",
+        "avatarUrl": "https://pbs.twimg.com/profile_images/1129505812689428481/b7xf60Yx.png",
+        "profileImageUrl": "https://pbs.twimg.com/profile_images/1129505812689428481/b7xf60Yx_normal.png",
+        "coverImageUrl": "https://pbs.twimg.com/profile_banners/1112913232652587008/1558130195/1500x500",
+        "bio": "",
+        "followers": 3,
+        "following": 1,
+        "username": "DinizTabata",
+        "verified": false,
+        "unSubscribed": false,
+        "deleted": false,
+        "snCreatedTime": 1554174166000,
+        "snModifiedTime": 1554174166000,
+        "statusCount": 2,
+        "accountSpecificInfos": [],
+        "additional": {},
+        "url": "https://twitter.com/DinizTabata"
+      },
+      "language": "tr",
+      "messageId": "ACCOUNT_1797057_1693833526565_TWITTER_5_1698687046263423019",
+      "brandPost": false,
+      "createdTime": 1693833526738,
+      "modifiedTime": 1693833526781,
+      "textEntities": {},
+      "insights": { "POST_REACH_COUNT": 1.0 },
+      "workflow": {
+        "modifiedTime": 1693833526839,
+        "customProperties": {
+          "_c_62a780173ce0ae09156889ad": ["Não"],
+          "61cc94b2163e057edf555318": ["Não Aplicável"],
+          "61ce1f6036098d1126e56732": ["Private"],
+          "61f15c75e8062a2f2c4d8126": ["Média"],
+          "61ce1f6036098d1126e5673b": ["Social"],
+          "61ce1f6036098d1126e56717": ["Yes"],
+          "61cc94b2163e057edf5552ca": ["No"],
+          "5df78ced92cb3e025cddd2b0": ["Score entre 0 e 20"],
+          "61ce1f5f36098d1126e5670e": ["No"],
+          "61ce1f6136098d1126e56957": ["0 - 500"],
+          "61ce1f6036098d1126e56720": ["Yes"],
+          "61ce1f5f36098d1126e566de": ["Twitter"]
+        },
+        "queues": [
+          { "queueId": 101159, "assignmentTime": 1693833526811 },
+          { "queueId": 101161, "assignmentTime": 1693833526811 },
+          { "queueId": 101162, "assignmentTime": 1693833526811 }
+        ],
+        "spaceWorkflows": []
+      },
+      "enrichments": {
+        "sentiment": 0,
+        "flaggedWords": {
+          "allFlaggedWords": [],
+          "imageFlaggedWords": [],
+          "messageFlaggedWords": [],
+          "videoFlaggedWords": []
+        }
+      },
+      "conversationId": "1112913232652587008_1484616750549319682",
+      "autoImported": false,
+      "autoResponse": false
+    },
+    "eventTime": 1693833526738,
+    "subscriptionDetails": { "subscriptionId": "64f5d0355f624809536a226e" }
+  },
+  {
+    "id": "64f5daa871153e2e5f112e65",
+    "type": "message.created",
+    "payload": {
+      "sourceType": "ACCOUNT",
+      "sourceId": 158343,
+      "content": {
+        "text": "Oiiee Bradesco, tudo bem?? Espero que sim!! \nVc pode mandar um beijo pro 8 ano a?? Amamos vcsss! 🩷"
+      },
+      "channelMessageId": "aWdfZAG1faXRlbToxOklHTWVzc2FnZAUlEOjE3ODQxNDAxNTk5OTkzMzU0OjM0MDI4MjM2Njg0MTcxMDMwMTI0NDI1OTI4ODk1MDEyMzc0NjYzODozMTI0NTcyMDMzNDQ3MTY0NTIzMjgzODcxOTE3OTg0OTcyOAZDZD",
+      "channelType": "INSTAGRAM",
+      "accountType": "INSTAGRAM",
+      "channelCreatedTime": 1693833893000,
+      "senderProfile": {
+        "name": "8 ano A 💥🥰",
+        "channelType": "INSTAGRAM",
+        "channelId": "6515388075221394",
+        "permalink": "https://instagram.com/8aasavino_",
+        "avatarUrl": "https://scontent-iad3-1.cdninstagram.com/v/t51.2885-19/366964613_1289586571688208_5493703693385130802_n.jpg?stp=dst-jpg_s200x200&_nc_cat=110&ccb=1-7&_nc_sid=8ae9d6&_nc_ohc=1-DEjqdWs6MAX_Zgn2n&_nc_ht=scontent-iad3-1.cdninstagram.com&edm=ALmAK4EEAAAA&oh=00_AfBxaNxDemgxW8jxo3Gc6EBk7bCqjIhiMObRaEhe4GqPiw&oe=64FB6029",
+        "profileImageUrl": "https://scontent-iad3-1.cdninstagram.com/v/t51.2885-19/366964613_1289586571688208_5493703693385130802_n.jpg?stp=dst-jpg_s200x200&_nc_cat=110&ccb=1-7&_nc_sid=8ae9d6&_nc_ohc=1-DEjqdWs6MAX_Zgn2n&_nc_ht=scontent-iad3-1.cdninstagram.com&edm=ALmAK4EEAAAA&oh=00_AfBxaNxDemgxW8jxo3Gc6EBk7bCqjIhiMObRaEhe4GqPiw&oe=64FB6029",
+        "followers": 97,
+        "following": 0,
+        "username": "8aasavino_",
+        "verified": false,
+        "unSubscribed": false,
+        "deleted": false,
+        "snCreatedTime": 0,
+        "snModifiedTime": 1693833895791,
+        "statusCount": 0,
+        "accountSpecificInfos": [
+          {
+            "accountId": 158343
+          }
+        ],
+        "additional": {
+          "isPsid": ["true"]
+        },
+        "url": "https://instagram.com/8aasavino_"
+      },
+      "receiverProfile": {
+        "name": "bradesco",
+        "channelType": "INSTAGRAM",
+        "channelId": "214709333",
+        "permalink": "https://www.instagram.com/bradesco",
+        "avatarUrl": "https://scontent-iad3-1.xx.fbcdn.net/v/t51.2885-15/340853170_1209551379695169_6393340492134659321_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=86c713&_nc_ohc=WUIFYy_nBJsAX_Dg8EU&_nc_ht=scontent-iad3-1.xx&edm=AJdBtusEAAAA&oh=00_AfCCRsAAn4gwDpqgfEcL2akWjgHKJLYJHgmkJ6udSvAMQg&oe=64FA447D",
+        "profileImageUrl": "https://scontent-iad3-1.xx.fbcdn.net/v/t51.2885-15/340853170_1209551379695169_6393340492134659321_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=86c713&_nc_ohc=WUIFYy_nBJsAX_Dg8EU&_nc_ht=scontent-iad3-1.xx&edm=AJdBtusEAAAA&oh=00_AfCCRsAAn4gwDpqgfEcL2akWjgHKJLYJHgmkJ6udSvAMQg&oe=64FA447D",
+        "bio": "Entre nós, você vem primeiro.",
+        "followers": 563505,
+        "following": 9,
+        "username": "bradesco",
+        "verified": false,
+        "unSubscribed": false,
+        "deleted": false,
+        "snCreatedTime": 1522975610777,
+        "snModifiedTime": 1522975610777,
+        "statusCount": 825,
+        "accountSpecificInfos": [],
+        "additional": {},
+        "url": "https://www.instagram.com/bradesco"
+      },
+      "language": "pt",
+      "messageId": "ACCOUNT_158343_1693833893000_INSTAGRAM_320_aWdfZAG1faXRlbToxOklHTWVzc2FnZAUlEOjE3ODQxNDAxNTk5OTkzMzU0OjM0MDI4MjM2Njg0MTcxMDMwMTI0NDI1OTI4ODk1MDEyMzc0NjYzODozMTI0NTcyMDMzNDQ3MTY0NTIzMjgzODcxOTE3OTg0OTcyOAZDZD",
+      "brandPost": false,
+      "createdTime": 1693833895843,
+      "modifiedTime": 1693833895963,
+      "textEntities": {},
+      "insights": {},
+      "workflow": {
+        "modifiedTime": 1693833896054,
+        "customProperties": {
+          "_c_62a780173ce0ae09156889ad": ["Não"],
+          "61ce1f6036098d1126e56732": ["Private"],
+          "61ce1f6036098d1126e56717": ["No"],
+          "61cc94b2163e057edf5552ca": ["No"],
+          "61ce1f6036098d1126e56720": ["Yes"],
+          "61ce1f5f36098d1126e566de": ["Instagram"],
+          "61cc94b2163e057edf555318": ["Não Aplicável"],
+          "61f15c75e8062a2f2c4d8126": ["Média"],
+          "61ce1f6036098d1126e5673b": ["Social"],
+          "5880bbcbe4b07dd1ff25e0e3": ["Instagram"],
+          "5880afa1e4b07dd1ff25c738": ["Bradesco"],
+          "_c_6112e583f13921018875fea7": ["DM"],
+          "61ce1f5f36098d1126e5670e": ["No"],
+          "61ce1f6136098d1126e56957": ["0 - 500"],
+          "5a576a79e4b06b5737014249": ["Instagram"]
+        },
+        "queues": [
+          {
+            "queueId": 101201,
+            "assignmentTime": 1693833896020
+          },
+          {
+            "queueId": 101158,
+            "assignmentTime": 1693833896020
+          },
+          {
+            "queueId": 101161,
+            "assignmentTime": 1693833896020
+          },
+          {
+            "queueId": 101162,
+            "assignmentTime": 1693833896020
+          }
+        ],
+        "spaceWorkflows": []
+      },
+      "enrichments": {
+        "sentiment": 1,
+        "flaggedWords": {
+          "allFlaggedWords": [],
+          "imageFlaggedWords": [],
+          "messageFlaggedWords": [],
+          "videoFlaggedWords": []
+        }
+      },
+      "conversationId": "aWdfZAG06MTpJR01lc3NhZA2VUaHJlYWQ6MTc4NDE0MDE1OTk5OTMzNTQ6MzQwMjgyMzY2ODQxNzEwMzAxMjQ0MjU5Mjg4OTUwMTIzNzQ2NjM4",
+      "autoImported": false,
+      "autoResponse": false
+    },
+    "eventTime": 1693833895843,
+    "subscriptionDetails": {
+      "subscriptionId": "64f5d0355f624809536a226e"
+    }
+  }
+]

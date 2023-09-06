@@ -1,0 +1,26 @@
+table name "Bots Sprinklr"
+id AI, int(11)
+bot_id int(11)
+bot_token varchar(30)
+bot_server_type varchar(20)
+bot_name varchar(40)
+account_id
+sprinklr_name varchar(40)
+channel_type 
+channel_id
+campaign_id
+campaign_name
+url_bot varchar(255)
+url_webhook varchar(255)
+
+table name "Customers Sprinklr"
+id AI, int(11)
+session_id int(11)
+bot_id
+channel_id (user_id)
+user_name
+send_to_inchat
+conversation_id
+message_id
+first_interaction
+last_interaction
