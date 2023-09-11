@@ -1,0 +1,55 @@
+CREATE TABLE sprinklr_bots (
+id INT(11) NOT NULL AUTO_INCREMENT,
+bot_id INT(11),
+bot_token VARCHAR(30),
+bot_server_type VARCHAR(20),
+bot_name VARCHAR(40),
+account_id VARCHAR(40),
+sprinklr_name VARCHAR(40),
+channel_type VARCHAR(40),
+channel_id VARCHAR(80),
+campaign_id VARCHAR(40),
+campaign_name VARCHAR(80),
+url_bot VARCHAR(255),
+url_webhook VARCHAR(255),
+PRIMARY KEY(ID));
+
+CREATE TABLE sprinklr_state (
+id int(11) NOT NULL AUTO_INCREMENT,
+session_id int(11),
+bot_id INT(11),
+channel_id VARCHAR(80),
+user_name VARCHAR(30),
+send_to_inchat TINYINT(1),
+conversation_id VARCHAR(80),
+message_id VARCHAR(80),
+first_interaction DATETIME,
+last_interaction DATETIME,
+PRIMARY KEY(id));
+
+INSERT INTO `sprinklr_bots` (
+bot_id,
+bot_token,
+bot_server_type,
+bot_name,
+account_id,
+sprinklr_name,
+channel_type,
+channel_id,
+campaign_id,
+campaign_name,
+url_bot,
+url_webhook) VALUES(
+103,
+'affvyja8931bor2b3cww',
+'staging',
+'Dr. Wilson',
+'1797057',
+'Tabata Diniz',
+'TWITTER',
+'1112913232652587008',
+'6667_10115',
+'Test Campaign',
+'https://in.bot/api/bot_gateway',
+'https://095b-191-13-21-87.ngrok-free.app/webhook'
+);

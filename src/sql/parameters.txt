@@ -13,7 +13,7 @@ campaign_name
 url_bot varchar(255)
 url_webhook varchar(255)
 
-table name "Customers Sprinklr"
+table name "Sprinklr STATE"
 id AI, int(11)
 session_id int(11)
 bot_id

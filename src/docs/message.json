@@ -222,5 +222,30 @@
     "subscriptionDetails": {
       "subscriptionId": "64f5d0355f624809536a226e"
     }
+  },
+  {
+    "accountId": 1797057,
+    "content": {
+      "text": "Os coronavírus causam infecções respiratórias muito contagiosas. São grandes vírus com espículas na superfície, lembrando uma coroa. Surgiram na China em 2002/2003 e nas últimas décadas sofreram mutações altamente agressivas. A mutação 2019-NCOV (COVID19) pode evoluir para uma síndrome respiratória aguda grave. Ainda não existe tratamento. <a target=\"_blank\" href=\"https://gisanddata.maps.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6\"> Clique aqui </a> para verificar o Mapa de Casos Globais. </a>\n",
+      "attachment": {
+        "type": "QUICK_REPLY",
+        "message": "Escolha uma opção",
+        "quickReplies": [
+          { "title": "Transmissão", "actionDetail": { "action": "TEXT" } },
+          { "title": "Sintomas", "actionDetail": { "action": "TEXT" } },
+          { "title": "Prevenção", "actionDetail": { "action": "TEXT" } },
+          { "title": "Diagnóstico", "actionDetail": { "action": "TEXT" } },
+          { "title": "Tratamento", "actionDetail": { "action": "TEXT" } },
+          { "title": "Vacinas", "actionDetail": { "action": "TEXT" } }
+        ]
+      }
+    },
+    "taxonomy": { "campaignId": "6667_10115" },
+    "inReplyToMessageId": "ACCOUNT_1797057_1694212935051_TWITTER_5_1700278400793837944",
+    "toProfile": {
+      "channelType": "TWITTER",
+      "channelId": "1484616750549319682",
+      "screenName": "Eduardo Augusto"
+    }
   }
 ]
