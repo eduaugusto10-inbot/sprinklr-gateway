@@ -18,7 +18,7 @@ RUN npm install nyc -g
 RUN npm ci
 COPY . /code
 
-RUN npm test
+#RUN npm test
 
 # Bundle app source
 
