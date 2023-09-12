@@ -1,6 +1,7 @@
 const express = require("express");
 const { WebhookController } = require("../controllers/WebhookController");
 const { MessageReceive } = require("../controllers/MessageReceive");
+const version = require("../services/Version");
 
 const router = express.Router();
 
