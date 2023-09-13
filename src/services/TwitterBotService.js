@@ -4,20 +4,18 @@ const utils = require('../utils')
 class TwitterBotService {
 
   async postMessage(body, respInbot) {
-    console.log('body')
-    console.log(body.payload.messageId)
     const sprinklrInstance = new SprinklrInstanceDAO();
     const channelID = body.payload.receiverProfile.channelId;
     let instance = await sprinklrInstance.getInstanceByChannelID(channelID); //dados retorno do banco
     instance = instance[0]
     console.log('retorno instance')
-    const quickReply = utils.extractQuickReplies(respInbot.resp)
-    console.log(quickReply)
+    const extractTwitterTags = utils.extractTwitter(respInbot.resp)
+    console.log(`Twitter retirado tags ${extractTwitterTags}`)
     let buttons = []
-    quickReply[1].map(v=>{
+    extractTwitterTags?.quick_reply?.options.map(v=>{
       buttons.push({
-        title: v.title,
-        subtitle: v.payload,
+        title: v.label,
+        subtitle: v.metadata,
         "actionDetail": {
           "action": "TEXT"
       }
@@ -26,7 +24,7 @@ class TwitterBotService {
     let payloadSprinklr = {
       accountId: parseInt(instance.account_id),
       content: {
-        text: quickReply[0],
+        text: extractTwitterTags.text,
       },
       taxonomy: {
         campaignId: instance.campaign_id,
@@ -38,7 +36,7 @@ class TwitterBotService {
         screenName: body.payload.senderProfile.name,  
       },
     };
-    if(quickReply[1].length>0){
+    if(extractTwitterTags?.quick_reply?.options?.length>0){
       payloadSprinklr.content.attachment = {
         "type": "QUICK_REPLY",
         "message": "Escolha uma opção",
@@ -59,15 +57,51 @@ class TwitterBotService {
           return 200;
         })
         .catch((err) => {
+          if(err.response.data.errors[0].message.includes("poucos minutos atrás"))
+              this.repostMessage(payloadSprinklr)
           return err;
         });
       console.log(body);
     } catch (error) {
-      console.log(error);
+      console.error(error.response);
+      return error;
+    }
+  }
+
+  async repostMessage(payloadSprinklr) {
+    let newMessage = payloadSprinklr.content.text;
+    const randomNumber = Math.floor(Math.random() * 50)
+    let counter = 1;
+    while(counter<randomNumber){
+      newMessage += " ";
+      counter++;
+    }
+    payloadSprinklr.content.text = newMessage;
+    const headers = {headers:{
+      "Key": "9ss9ydpek7enuch389up8z35",
+      "Authorization": "Bearer P9+ewuw+Nid5hg4KBRNPGngd+m++5PNsBETNnrutBOE0MWIxZjc0Zi0xY2EwLTNjOTQtOTJlZi03OGRiMzc5OTZiOGE="
+    }}
+    const url_sprinklr = "https://api2.sprinklr.com/api/v2/publishing/message";
+    try {
+      axios
+        .post(url_sprinklr, payloadSprinklr,headers)
+        .then((response) => {
+          console.log(response.data);
+          return 200;
+        })
+        .catch((err) => {
+          if(err.response.data.errors[0].message.includes("poucos minutos atrás"))
+          console.error(JSON.stringify(err.response.data.errors[0].message))
+          return err;
+        });
+      console.log(body);
+    } catch (error) {
+      console.error(error.response);
       return error;
     }
   }
 }
+
 
 module.exports = {
   TwitterBotService,

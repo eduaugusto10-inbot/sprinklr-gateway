@@ -22,15 +22,15 @@ class TwitterService {
     // Verifica se usuario existe, caso nao cadastra
     const dbUserState = await sprinklrState.getStateByUserId(body.payload.senderProfile.channelId,instance.bot_id);
     console.log(new Date(), `Usuario: ${JSON.stringify(dbUserState)}`)
-    const ww = await this.createOrRetrieveState(dbUserState,instance,body)
-    console.log(ww)
-    const sessionId = ww.session_id
+    const dbUser = await this.createOrRetrieveState(dbUserState,instance,body)
+    console.log(dbUser)
+    const sessionId = dbUser.session_id
     let payloadInbot = {
       bot_id: instance.bot_id,
       user_id: body.payload.senderProfile.channelId,
       bot_server_type: instance.bot_server_type,
       bot_token: instance.bot_token,
-      channel: "teams",//body.payload.channelType,
+      channel: body.payload.channelType,
       user_phrase: body.payload.content.text,
       setvar: setVarStr,
       session_id: sessionId,

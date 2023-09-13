@@ -2,7 +2,6 @@ const { TwitterService } = require("../services/TwitterService");
 
 class WebhookController {
   async getMessage(req, res) {
-    console.log(req.body)
     const channelType = req.body?.payload?.channelType
       ? req.body.payload.channelType
       : "";
