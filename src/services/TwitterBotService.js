@@ -19,6 +19,7 @@ class TwitterBotService {
           return 200;
         })
         .catch((err) => {
+          console.log(err.response.data)
           if(err.response.data.errors[0].message.includes("poucos minutos atrás"))
               this.repostMessage(payloadSprinklr)
           return err;
@@ -48,7 +49,7 @@ class TwitterBotService {
     extractTwitterTags?.quick_reply?.options.map(v=>{
       buttons.push({
         title: v.label,
-        subtitle: v.metadata,
+        subtitle: "",//v.metadata,
         "actionDetail": {
           "action": "TEXT"
       }
