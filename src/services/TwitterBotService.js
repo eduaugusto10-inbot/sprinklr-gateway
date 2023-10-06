@@ -9,7 +9,7 @@ class TwitterBotService {
     const url_sprinklr = "https://api2.sprinklr.com/api/v2/publishing/message";
     const headers = {headers:{
       "Key": "9ss9ydpek7enuch389up8z35",
-      "Authorization": "Bearer P9+ewuw+Nid5hg4KBRNPGngd+m++5PNsBETNnrutBOE0MWIxZjc0Zi0xY2EwLTNjOTQtOTJlZi03OGRiMzc5OTZiOGE="
+      "Authorization": "Bearer Yc+5FmQnk/GwPZl5g/jAc25duosligyp7GkMugZvff85YTgxY2Y0OS1lZjI3LTM4ZDAtODRhOC0zYTQ3YTZhZmEzZDE="
     }}
     try {
       axios
