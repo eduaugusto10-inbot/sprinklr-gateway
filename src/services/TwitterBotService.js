@@ -101,8 +101,8 @@ class TwitterBotService {
     }
     payloadSprinklr.content.text = newMessage;
     const headers = {headers:{
-      "Key": "9ss9ydpek7enuch389up8z35",
-      "Authorization": "Bearer P9+ewuw+Nid5hg4KBRNPGngd+m++5PNsBETNnrutBOE0MWIxZjc0Zi0xY2EwLTNjOTQtOTJlZi03OGRiMzc5OTZiOGE="
+      "Key": "265cez298wgp99eahsrk46cq",
+      "Authorization": "Bearer DjBqzqEquhNKWj2x+ZcmtVKHAs/5Myhkfi23VQdTb48zYWJiMzUzZC0wMDMyLTM2YmMtYjE4NS05ZDdhNzdlZDhkYWI="
     }}
     const url_sprinklr = "https://api2.sprinklr.com/api/v2/publishing/message";
     try {
@@ -113,8 +113,7 @@ class TwitterBotService {
           return 200;
         })
         .catch((err) => {
-          if(err.response.data.errors[0].message.includes("poucos minutos atrás"))
-          console.error(JSON.stringify(err.response.data.errors[0].message))
+          console.error(JSON.stringify(err.response.data))
           return err;
         });
       console.log(body);
