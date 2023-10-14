@@ -36,17 +36,16 @@ class TwitterBotService {
     const channelID = body.payload.receiverProfile.channelId;
     let instance = await sprinklrInstance.getInstanceByChannelID(channelID); //dados retorno do banco
     instance = instance[0]
-    console.log('retorno instance')
     const extractTwitterTags = utils.extractTwitter(respInbot.resp)
-    console.log(`Twitter retirado tags ${JSON.stringify(extractTwitterTags)}`)
-    const textBlocks = utils.separarBlocos(extractTwitterTags.text)
+    const msgParse = JSON.parse(extractTwitterTags);
+    const textBlocks = utils.separarBlocos(msgParse.text)
     console.log(`textBlocks ${JSON.stringify(textBlocks)}`)
-    if(extractTwitterTags?.quick_reply?.options.length > 0){
+    if(msgParse?.quick_reply?.options.length > 0){
       textBlocks[textBlocks.length - 1].last = true
     }
 
     let buttons = []
-    extractTwitterTags?.quick_reply?.options.map(v=>{
+    msgParse?.quick_reply?.options.map(v=>{
       buttons.push({
         title: v.label,
         subtitle: "",//v.metadata,
@@ -75,7 +74,8 @@ class TwitterBotService {
         },
       };
       if(bloco.last){
-        if(extractTwitterTags?.quick_reply?.options?.length>0){
+        console.log(`Bloco last ${JSON.stringify(bloco)}`)
+        if(msgParse?.quick_reply?.options?.length>0){
           payloadSprinklr.content.text = bloco.bloco !== ' ' ? bloco.bloco : "Escolha uma opção";
           payloadSprinklr.content.attachment = {
             "type": "QUICK_REPLY",
