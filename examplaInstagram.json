@@ -1,0 +1,21 @@
+{
+  "accountId": 1820327,
+  "content": {
+    "text": "Qual cartão você se refere o de débito ou crédito?[quick_replies]\n   {\n      \"payload\" : \"CARTAO_DEBITO\",\n      \"title\" : \"Cartão de Débito\",\n      \"content_type\" : \"text\"\n   },\n   {\n      \"content_type\" : \"text\",\n      \"title\" : \"Cartão de Crédito\",\n      \"payload\" : \"CREDITO_INFORMACOES\"\n   }\n\n[/quick_replies]",
+    "attachment": {
+      "type": "QUICK_REPLY",
+      "message": "Escolha uma opção",
+      "quickReplies": [
+        { "actionDetail": { "action": "TEXT" } },
+        { "actionDetail": { "action": "TEXT" } }
+      ]
+    }
+  },
+  "taxonomy": { "campaignId": "6667_10115" },
+  "inReplyToMessageId": "ACCOUNT_1820327_1697318090057_INSTAGRAM_320_aWdfZAG1faXRlbToxOklHTWVzc2FnZAUlEOjE3ODQxNDYxNDMwNTE3MjM1OjM0MDI4MjM2Njg0MTcxMDMwMTI0NDI1OTQ0MjI5Njg5ODQyNjcyODozMTMwOTk5MjQxODk3NDY1OTUwODI4OTYzMTAwMDk4NTYwMAZDZD",
+  "toProfile": {
+    "channelType": "INSTAGRAM",
+    "channelId": "25040219642244364",
+    "screenName": "Eduardo Oliveira"
+  }
+}
