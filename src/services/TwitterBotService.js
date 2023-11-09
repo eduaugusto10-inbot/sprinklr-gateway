@@ -57,14 +57,7 @@ class TwitterBotService {
     for(const bloco of textBlocks){
       if (bloco.delay > 0)
       await Promise.delay(bloco.delay * 1000);
-      const tagsHTMLWithText = utils.attachmentCreate(bloco.bloco);
-      if(tagsHTMLWithText.length>0){
-        payloadSprinklr.content.text = tagsHTMLWithText.text;
-        payloadSprinklr.content.attachment = {
-          "type": tagsHTMLWithText.mediaType,
-          "url": tagsHTMLWithText.url
-        }
-      }
+
       let payloadSprinklr = {
         accountId: parseInt(instance.account_id),
         content: {
@@ -80,6 +73,16 @@ class TwitterBotService {
           screenName: body.payload.senderProfile.name,  
         },
       };
+
+      const tagsHTMLWithText = utils.attachmentCreate(bloco.bloco);
+      if(tagsHTMLWithText.length>0){
+        payloadSprinklr.content.text = tagsHTMLWithText.text;
+        payloadSprinklr.content.attachment = {
+          "type": tagsHTMLWithText.mediaType,
+          "url": tagsHTMLWithText.url
+        }
+      }
+      
       if(bloco.last){
         console.log(`Bloco last ${JSON.stringify(bloco)}`)
         if(msgParse?.quick_reply?.options?.length>0){
