@@ -76,7 +76,7 @@ class TwitterBotService {
 
       if(utils.isHasOwnProperty(respInbot,"data")){
         payloadSprinklr.content.attachment = {
-          "type": respInbot.data.type,
+          "type": respInbot.data.type.toUpperCase(),
           "url": respInbot.data.link
         }
       }
