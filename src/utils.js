@@ -130,10 +130,24 @@ function extractQuickReplies(orig) {
   }
 }
 
+function isEmptyObject(obj) {
+  for (let prop in obj) {
+    if (obj.hasOwnProperty(prop)) return false;
+  }
+  return true;
+}
+
+
+function isHasOwnProperty(o, i) {
+  return !isEmptyObject(o) && Object.prototype.hasOwnProperty.call(o, i);
+}
+
+
 module.exports = {
   sessionGenerator,
   extractTwitter,
   separarBlocos,
   extractQuickReplies,
   attachmentCreate,
+  isHasOwnProperty
 };

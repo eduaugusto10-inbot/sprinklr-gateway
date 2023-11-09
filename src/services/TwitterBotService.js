@@ -74,12 +74,10 @@ class TwitterBotService {
         },
       };
 
-      const tagsHTMLWithText = utils.attachmentCreate(bloco.bloco);
-      if(tagsHTMLWithText.length>0){
-        payloadSprinklr.content.text = tagsHTMLWithText.text;
+      if(utils.isHasOwnProperty(respInbot,"data")){
         payloadSprinklr.content.attachment = {
-          "type": tagsHTMLWithText.mediaType,
-          "url": tagsHTMLWithText.url
+          "type": respInbot.data.type,
+          "url": respInbot.data.link
         }
       }
       
