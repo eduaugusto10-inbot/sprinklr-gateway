@@ -9,7 +9,7 @@ class TwitterBotService {
     const url_sprinklr = "https://api2.sprinklr.com/api/v2/publishing/message";
     const headers = {headers:{
       "Key": "265cez298wgp99eahsrk46cq",
-      "Authorization": "Bearer DjBqzqEquhNKWj2x+ZcmtVKHAs/5Myhkfi23VQdTb48zYWJiMzUzZC0wMDMyLTM2YmMtYjE4NS05ZDdhNzdlZDhkYWI="
+      "Authorization": "Bearer BCW0TEWpdqAlmNv77iTlLAbNC3h1VKHkw7tFRpOtfStjZDYxZDk3ZS04ZTVmLTNmZDItOTkzOC02Y2E5ZGViOGUyZjg="
     }}
     try {
       axios
@@ -109,7 +109,7 @@ class TwitterBotService {
     payloadSprinklr.content.text = newMessage;
     const headers = {headers:{
       "Key": "265cez298wgp99eahsrk46cq",
-      "Authorization": "Bearer DjBqzqEquhNKWj2x+ZcmtVKHAs/5Myhkfi23VQdTb48zYWJiMzUzZC0wMDMyLTM2YmMtYjE4NS05ZDdhNzdlZDhkYWI="
+      "Authorization": "Bearer BCW0TEWpdqAlmNv77iTlLAbNC3h1VKHkw7tFRpOtfStjZDYxZDk3ZS04ZTVmLTNmZDItOTkzOC02Y2E5ZGViOGUyZjg="
     }}
     const url_sprinklr = "https://api2.sprinklr.com/api/v2/publishing/message";
     try {
