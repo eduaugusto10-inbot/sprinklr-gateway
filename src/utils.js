@@ -64,6 +64,34 @@ function separarBlocos(texto, index = 0, blocos = [], firstCall = true) {
   return separarBlocos(texto, fim, blocos, false);
 }
 
+function attachmentCreate(orig) {
+  const regexVideo = /<video\s?.*?<\/video\s*>/gi;
+  const regexImage = /<img\s?.*?\/>/gi
+  let mediaType="";
+  let mediaURLs;
+  let text=orig;
+
+  // Verifica se contém vídeo
+  if (orig.match(regexVideo) !== null) {
+    mediaType = "VIDEO";
+    // Localiza o link do vídeo "https..."
+    const regexHttps = /(?<![\(\/])(http\S+[^.,"\s])(?!\))/gi;
+    mediaURLs = orig.match(regexHttps)[0] || [];
+    text=orgi.replace(regexVideo,"");
+  }
+
+  // Verifica se contém imagem
+  if (orig.match(regexImage) !== null) {
+    mediaType = "IMAGE";
+    // Localiza o link da imagem "https..."
+    const regexHttps = /(?<![\(\/])(http\S+[^.,"\s])(?!\))/gi;
+    mediaURLs = orig.match(regexHttps)[0] || [];
+    text=orgi.replace(regexImage,"");
+  }
+  return mediaType!==''? [{url:mediaURLs, mediaType:mediaType, text:text}] : [];
+}
+
+
 function extractQuickReplies(orig) {
   let match = orig.match(
     /^(?<main>.*)\[quick_replies\](?<quickreplies>.*?)\[\/quick_replies\](?<rest>.*)$/s
@@ -107,4 +135,5 @@ module.exports = {
   extractTwitter,
   separarBlocos,
   extractQuickReplies,
+  attachmentCreate,
 };
