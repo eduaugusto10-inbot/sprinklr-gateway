@@ -1,27 +1,35 @@
 const axios = require("axios");
 const { SprinklrInstanceDAO } = require("../models/SprinklrInstanceDAO");
-const utils = require('../utils')
-const Promise = require('bluebird');
+const { SprinklrCredentialsDAO } = require("../models/SprinklrCredentialsDAO");
+const utils = require("../utils");
+const Promise = require("bluebird");
 class TwitterBotService {
+  async sendMessage(payloadSprinklr) {
+    const sprinklrCredentials = new SprinklrCredentialsDAO();
+    let credentials = await sprinklrCredentials.getCredentials(); //dados retorno do banco
+    credentials = credentials[0];
 
-  async sendMessage(payloadSprinklr){
-    console.log(JSON.stringify(payloadSprinklr))
+    console.log(JSON.stringify(payloadSprinklr));
     const url_sprinklr = "https://api2.sprinklr.com/api/v2/publishing/message";
-    const headers = {headers:{
-      "Key": "265cez298wgp99eahsrk46cq",
-      "Authorization": "Bearer BCW0TEWpdqAlmNv77iTlLAbNC3h1VKHkw7tFRpOtfStjZDYxZDk3ZS04ZTVmLTNmZDItOTkzOC02Y2E5ZGViOGUyZjg="
-    }}
+    const headers = {
+      headers: {
+        Key: credentials.client_id,
+        Authorization: `Bearer ${credentials.token}`,
+      },
+    };
     try {
       axios
-        .post(url_sprinklr, payloadSprinklr,headers)
+        .post(url_sprinklr, payloadSprinklr, headers)
         .then((response) => {
           console.log(response.data);
           return 200;
         })
         .catch((err) => {
-          console.log(err.response.data)
-          if(err.response.data.errors[0].message.includes("poucos minutos atrás"))
-              this.repostMessage(payloadSprinklr)
+          console.log(err.response.data);
+          if (
+            err.response.data.errors[0].message.includes("poucos minutos atrás")
+          )
+            this.repostMessage(payloadSprinklr);
           return err;
         });
       console.log(body);
@@ -35,33 +43,31 @@ class TwitterBotService {
     const sprinklrInstance = new SprinklrInstanceDAO();
     const channelID = body.payload.receiverProfile.channelId;
     let instance = await sprinklrInstance.getInstanceByChannelID(channelID); //dados retorno do banco
-    instance = instance[0]
-    const extractTwitterTags = utils.extractTwitter(respInbot.resp)
-    const msgParse = JSON.parse(extractTwitterTags);
-    const textBlocks = utils.separarBlocos(msgParse.text)
-    console.log(`textBlocks ${JSON.stringify(textBlocks)}`)
-    if(msgParse?.quick_reply?.options.length > 0){
-      textBlocks[textBlocks.length - 1].last = true
-    }
+    instance = instance[0];
+    console.log(`Resp: ${JSON.stringify(respInbot.resp)}`);
 
-    let buttons = []
-    msgParse?.quick_reply?.options.map(v=>{
-      buttons.push({
-        title: v.label,
-        subtitle: "",//v.metadata,
-        "actionDetail": {
-          "action": "TEXT"
-      }
-      })
-    })
-    for(const bloco of textBlocks){
-      if (bloco.delay > 0)
-      await Promise.delay(bloco.delay * 1000);
+    for (const bloco of respInbot.resp) {
+      const extractTwitterTags = utils.extractTwitter(bloco.message);
+
+      const quickReply = utils.extractQuickReplies(extractTwitterTags);
+
+      let buttons = [];
+      quickReply[1]?.map((v) => {
+        buttons.push({
+          title: v.title,
+          subtitle: "", //v.metadata,
+          actionDetail: {
+            action: "TEXT",
+          },
+        });
+      });
+
+      if (bloco.delay > 0) await Promise.delay(bloco.delay * 1000);
 
       let payloadSprinklr = {
         accountId: parseInt(instance.account_id),
         content: {
-          text: bloco.bloco,
+          text: bloco.message,
         },
         taxonomy: {
           campaignId: instance.campaign_id,
@@ -70,58 +76,59 @@ class TwitterBotService {
         toProfile: {
           channelType: instance.channel_type,
           channelId: body.payload.senderProfile.channelId,
-          screenName: body.payload.senderProfile.name,  
+          screenName: body.payload.senderProfile.name,
         },
       };
 
-      if(utils.isHasOwnProperty(respInbot,"data")){
+      if (bloco.media_type !== "") {
         payloadSprinklr.content.attachment = {
-          "type": respInbot.data.type.toUpperCase(),
-          "url": respInbot.data.link
-        }
+          type: bloco.media_type.toUpperCase(),
+          url: bloco.media,
+        };
       }
-      
-      if(bloco.last){
-        console.log(`Bloco last ${JSON.stringify(bloco)}`)
-        if(msgParse?.quick_reply?.options?.length>0){
-          payloadSprinklr.content.text = bloco.bloco !== ' ' ? bloco.bloco : "Escolha uma opção";
-          payloadSprinklr.content.attachment = {
-            "type": "QUICK_REPLY",
-            "message": "Escolha uma opção",
-            "quickReplies": buttons
-          }
-        }
-      } 
-      console.log(`Envio do texto: ${JSON.stringify(payloadSprinklr)}`)
-      this.sendMessage(payloadSprinklr)
-  }
-    
 
+      if (buttons.length > 0) {
+        payloadSprinklr.content.text = "Escolha uma opção";
+        payloadSprinklr.content.attachment = {
+          type: "QUICK_REPLY",
+          message: "Escolha uma opção",
+          quickReplies: buttons,
+        };
+      }
+
+      console.log(`Envio do texto: ${JSON.stringify(payloadSprinklr)}`);
+      this.sendMessage(payloadSprinklr);
+    }
   }
 
   async repostMessage(payloadSprinklr) {
+    const sprinklrCredentials = new SprinklrCredentialsDAO();
+    let credentials = await sprinklrCredentials.getCredentials(); //dados retorno do banco
+    credentials = credentials[0];
     let newMessage = payloadSprinklr.content.text;
-    const randomNumber = Math.floor(Math.random() * 50)
+    const randomNumber = Math.floor(Math.random() * 50);
     let counter = 1;
-    while(counter<randomNumber){
+    while (counter < randomNumber) {
       newMessage += " ";
       counter++;
     }
     payloadSprinklr.content.text = newMessage;
-    const headers = {headers:{
-      "Key": "265cez298wgp99eahsrk46cq",
-      "Authorization": "Bearer BCW0TEWpdqAlmNv77iTlLAbNC3h1VKHkw7tFRpOtfStjZDYxZDk3ZS04ZTVmLTNmZDItOTkzOC02Y2E5ZGViOGUyZjg="
-    }}
+    const headers = {
+      headers: {
+        Key: credentials.client_id,
+        Authorization: `Bearer ${credentials.token}`,
+      },
+    };
     const url_sprinklr = "https://api2.sprinklr.com/api/v2/publishing/message";
     try {
       axios
-        .post(url_sprinklr, payloadSprinklr,headers)
+        .post(url_sprinklr, payloadSprinklr, headers)
         .then((response) => {
           console.log(response.data);
           return 200;
         })
         .catch((err) => {
-          console.error(JSON.stringify(err.response.data))
+          console.error(JSON.stringify(err.response.data));
           return err;
         });
       console.log(body);
@@ -131,7 +138,6 @@ class TwitterBotService {
     }
   }
 }
-
 
 module.exports = {
   TwitterBotService,

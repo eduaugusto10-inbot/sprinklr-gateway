@@ -30,8 +30,8 @@ class TwitterService {
       user_id: body.payload.senderProfile.channelId,
       bot_server_type: instance.bot_server_type,
       bot_token: instance.bot_token,
-      channel: body.payload.channelType,
-      user_phrase: body.payload.content.text,
+      channel:"twitter_sprinklr",// body.payload.channelType==="TWITTER"?"sprinklr-twitter":"sprinklr-instagram",
+      user_phrase: body.payload.content.text, 
       setvar: setVarStr,
       session_id: sessionId,
       url_webhook: instance.url_webhook,
@@ -39,7 +39,8 @@ class TwitterService {
     console.log(payloadInbot);
     try {
       await axios.post(instance.url_bot,payloadInbot).then(resp=>{
-        console.log(resp.data)
+        console.log("JSON.stringify(resp.data)")
+        console.log(JSON.stringify(resp.data))
         twitterBotService.postMessage(body,resp.data)
       })
       // console.log(body);

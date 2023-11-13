@@ -3,6 +3,8 @@ const { SprinklrInstanceDAO } = require("../models/SprinklrInstanceDAO");
 const { SprinklrStateDAO } = require("../models/SprinklrStateDAO");
 const utils = require("../utils");
 const { InstagramBotService } = require("./InstagramBotService");
+const FormData = require('form-data');
+const inbotService = require('./InbotService')
 // Se não houver receiverProfile a comunicação realizada não foi via messages, tenho que ignorar
 class InstagramService {
   async getMessage(body) {
@@ -30,15 +32,36 @@ class InstagramService {
       user_id: body.payload.senderProfile.channelId,
       bot_server_type: instance.bot_server_type,
       bot_token: instance.bot_token,
-      channel: body.payload.channelType,
-      user_phrase: body.payload.content.text,
+      channel: "instagram-sprinklr",//body.payload.channelType,
       setvar: setVarStr,
       session_id: sessionId,
       url_webhook: instance.url_webhook,
     };
+
+  if (utils.isHasOwnProperty(body.payload.content,"text")){
+    payloadInbot.user_phrase= body.payload.content.text;
+  } else {
+     // Envio de arquivos
+     var data = new FormData()
+     console.log(body.payload.content.attachment)
+    data.append("file-upload-anexo", body.payload.content.attachment.url);
+    data.append("action", "file-upload");
+    data.append("bot_id", instance.bot_id);
+    data.append("bot_token", instance.bot_token);
+    data.append("mime_type", body.payload.content.attachment.type);
+    data.append("folder", "user-files");
+    data.append("session_id", sessionId);
+    data.append("user_id", body.payload.senderProfile.channelId);
+    data.append("channel", body.payload.channelType+"-sprinklr");
+    data.append("USER_PHONE", body.payload.senderProfile.channelId);
+    const uploadFile = await inbotService.postFile(data);
+    console.log(uploadFile)
+    payloadInbot.user_phrase= "AFTER_UPLOAD " + uploadFile.url + " mime_type=" + body.payload.content.attachment.type;
+  }
+
     console.log(payloadInbot);
     try {
-      await axios.post(instance.url_bot,payloadInbot).then(resp=>{
+      await axios.post(instance.url_bot,payloadInbot).then(resp=>{  
         console.log(resp.data)
         instagramBotService.postMessage(body,resp.data)
       })
@@ -78,6 +101,8 @@ class InstagramService {
     let lastInteraction = new Date(dbUserState.last_interaction);
     lastInteraction = lastInteraction.setMinutes(lastInteraction.getMinutes() + 30);
     lastInteraction = new Date(lastInteraction)
+    console.log(`now: ${now}`)
+    console.log(`Last interaction: ${lastInteraction}`)
     if(now > lastInteraction){
       const sessionId = utils.sessionGenerator(32);
       try {
