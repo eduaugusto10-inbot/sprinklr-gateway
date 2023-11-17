@@ -86,7 +86,7 @@ class InstagramBotService {
       if (buttons.length > 0) {
         payloadSprinklr.content.attachment = {
           type: "QUICK_REPLY",
-          message: bloco.message+" \n"+(bloco.media_type === "video"?bloco.media:""),
+          message: quickReply[0]+" \n"+(bloco.media_type === "video"?bloco.media:""),
           quickReplies: buttons,
         };
       } else {
