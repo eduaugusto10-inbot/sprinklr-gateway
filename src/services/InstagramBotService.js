@@ -64,9 +64,6 @@ class InstagramBotService {
 
       let payloadSprinklr = {
         accountId: parseInt(instance.account_id),
-        content: {
-          text: bloco.message+" \n"+(bloco.media_type === "video"?bloco.media:""),
-        },
         taxonomy: {
           campaignId: instance.campaign_id,
         },
@@ -86,12 +83,13 @@ class InstagramBotService {
       }
 
       if (buttons.length > 0) {
-        payloadSprinklr.content.text = "Escolha uma opção";
         payloadSprinklr.content.attachment = {
           type: "QUICK_REPLY",
-          message: "Escolha uma opção",
+          message: bloco.message+" \n"+(bloco.media_type === "video"?bloco.media:""),
           quickReplies: buttons,
         };
+      } else {
+        payloadSprinklr.content.text= bloco.message+" \n"+(bloco.media_type === "video"?bloco.media:"")
       }
 
       console.log(`Envio do texto: ${JSON.stringify(payloadSprinklr)}`);
