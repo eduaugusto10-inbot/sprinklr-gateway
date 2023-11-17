@@ -20,7 +20,7 @@ class InstagramService {
       console.log(new Date(), `Bot ${channelID} não cadastrado`);
       return "Bot não cadastrado";
     }
-    const setVarStr = "";
+    const setVarStr = `full_name=${body.payload.senderProfile.name}`;
     // Verifica se usuario existe, caso nao cadastra
     const dbUserState = await sprinklrState.getStateByUserId(body.payload.senderProfile.channelId,instance.bot_id);
     console.log(new Date(), `Usuario: ${JSON.stringify(dbUserState)}`)
