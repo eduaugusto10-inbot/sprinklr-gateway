@@ -64,6 +64,7 @@ class InstagramBotService {
 
       let payloadSprinklr = {
         accountId: parseInt(instance.account_id),
+        content: {},
         taxonomy: {
           campaignId: instance.campaign_id,
         },
@@ -89,7 +90,7 @@ class InstagramBotService {
           quickReplies: buttons,
         };
       } else {
-        payloadSprinklr.content.text= bloco.message+" \n"+(bloco.media_type === "video"?bloco.media:"")
+        payloadSprinklr.content.text = bloco.message+" \n"+(bloco.media_type === "video"?bloco.media:"")
       }
 
       console.log(`Envio do texto: ${JSON.stringify(payloadSprinklr)}`);
