@@ -66,9 +66,7 @@ class TwitterBotService {
 
       let payloadSprinklr = {
         accountId: parseInt(instance.account_id),
-        content: {
-          text: bloco.message,
-        },
+        content: {},
         taxonomy: {
           campaignId: instance.campaign_id,
         },
@@ -88,13 +86,15 @@ class TwitterBotService {
       }
 
       if (buttons.length > 0) {
-        payloadSprinklr.content.text = "Escolha uma opção";
         payloadSprinklr.content.attachment = {
           type: "QUICK_REPLY",
-          message: "Escolha uma opção",
+          message: quickReply[0]+" \n"+(bloco.media_type === "video"?bloco.media:""),
           quickReplies: buttons,
         };
+      } else {
+        payloadSprinklr.content.text = bloco.message+" \n"+(bloco.media_type === "video"?bloco.media:"")
       }
+
 
       console.log(`Envio do texto: ${JSON.stringify(payloadSprinklr)}`);
       this.sendMessage(payloadSprinklr);
