@@ -88,6 +88,7 @@ class TwitterBotService {
       }
 
       if (buttons.length > 0) {
+        payloadSprinklr.content.text = quickReply[0];
         payloadSprinklr.content.attachment = {
           type: "QUICK_REPLY",
           message: "Escolha uma opção",
