@@ -144,62 +144,63 @@ function isHasOwnProperty(o, i) {
   return !isEmptyObject(o) && Object.prototype.hasOwnProperty.call(o, i);
 }
 
-async function speechToText(audio) {
-const token = await speechToTextToken()
-  let data = qs.stringify({
-    'session': token,
-    'user_id': 'edu_precisa_mudar',
-    'channel': 'testChannel',
-    'url': audio
-  });
+const speechToText = async function(audio) {
+  try {
+    const token = await speechToTextToken();
 
-  let config = {
-    method: 'post',
-    url: 'https://tools.inbot.com.br/speech/v1/audio/transcribe/url',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    data: data
-  };
-
-  await axios.request(config)
-    .then((response) => {
-      console.log(JSON.stringify(response.data[0][0]));
-      return (response.data[0][0]);
-    })
-    .catch((error) => {
-      console.log(error);
+    const data = qs.stringify({
+      'session': token,
+      'user_id': 'edu_precisa_mudar',
+      'channel': 'testChannel',
+      'url': audio
     });
 
+    const config = {
+      method: 'post',
+      url: 'https://tools.inbot.com.br/speech/v1/audio/transcribe/url',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      data: data
+    };
+
+    const response = await axios.request(config);
+    const transcription = response.data[0][0];
+    
+    console.log(JSON.stringify(transcription));
+    return transcription;
+  } catch (error) {
+    console.error(error);
+    throw error; // lança o erro novamente para que o chamador possa lidar com ele
+  }
 }
 
-async function speechToTextToken(){
-  let data = qs.stringify({
-    'client': 'edu_precisa_mudar',
-    'secret': 'senhavazia_precisa_mudar',
-    'channel': 'testChannel' 
-  });
-  
-  let config = {
-    method: 'post',
-    maxBodyLength: Infinity,
-    url: 'https://tools.inbot.com.br/speech/v1/auth/login',
-    headers: { 
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    data : data
-  };
-  
-  await axios.request(config)
-  .then((response) => {
-    console.log(JSON.stringify(response.data));
-    return (response.data.session_id)
-  })
-  .catch((error) => {
-    console.log(error);
-  });
-  
-}
+
+const speechToTextToken = async function () {
+  try {
+    const data = qs.stringify({
+      'client': 'edu_precisa_mudar',
+      'secret': 'senhavazia_precisa_mudar',
+      'channel': 'testChannel'
+    });
+
+    const config = {
+      method: 'post',
+      url: 'https://tools.inbot.com.br/speech/v1/auth/login',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      data: data
+    };
+
+    const response = await axios.request(config);
+    return response.data.session_id; // ou qualquer propriedade que contenha o token
+  } catch (error) {
+    console.error(error);
+    throw error; // lança o erro novamente para que o chamador possa lidar com ele
+  }
+};
+
 
 module.exports = {
   sessionGenerator,
