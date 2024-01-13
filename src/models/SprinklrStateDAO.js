@@ -63,7 +63,7 @@ class SprinklrStateDAO {
     const now = new Date();
     return new Promise((resolve, reject) => {
       db.query(
-        "UPDATE sprinklr_state SET last_interaction = ? AND session_id WHERE user_name=? AND bot_id=?",
+        "UPDATE sprinklr_state SET last_interaction = ?, session_id = ? WHERE user_name=? AND bot_id=?",
         [now, sessionId, userId, botId],
         (err, result) => {
           if (err) {

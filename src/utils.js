@@ -1,4 +1,6 @@
 const { createHash } = require("node:crypto");
+const axios = require('axios');
+const qs = require('qs');
 
 function sessionGenerator(maxLen) {
   return createHash("sha3-256")
@@ -67,9 +69,9 @@ function separarBlocos(texto, index = 0, blocos = [], firstCall = true) {
 function attachmentCreate(orig) {
   const regexVideo = /<video\s?.*?<\/video\s*>/gi;
   const regexImage = /<img\s?.*?\/>/gi
-  let mediaType="";
+  let mediaType = "";
   let mediaURLs;
-  let text=orig;
+  let text = orig;
 
   // Verifica se contém vídeo
   if (orig.match(regexVideo) !== null) {
@@ -77,7 +79,7 @@ function attachmentCreate(orig) {
     // Localiza o link do vídeo "https..."
     const regexHttps = /(?<![\(\/])(http\S+[^.,"\s])(?!\))/gi;
     mediaURLs = orig.match(regexHttps)[0] || [];
-    text=orgi.replace(regexVideo,"");
+    text = orgi.replace(regexVideo, "");
   }
 
   // Verifica se contém imagem
@@ -86,9 +88,9 @@ function attachmentCreate(orig) {
     // Localiza o link da imagem "https..."
     const regexHttps = /(?<![\(\/])(http\S+[^.,"\s])(?!\))/gi;
     mediaURLs = orig.match(regexHttps)[0] || [];
-    text=orgi.replace(regexImage,"");
+    text = orgi.replace(regexImage, "");
   }
-  return mediaType!==''? [{url:mediaURLs, mediaType:mediaType, text:text}] : [];
+  return mediaType !== '' ? [{ url: mediaURLs, mediaType: mediaType, text: text }] : [];
 }
 
 
@@ -142,6 +144,62 @@ function isHasOwnProperty(o, i) {
   return !isEmptyObject(o) && Object.prototype.hasOwnProperty.call(o, i);
 }
 
+async function speechToText(audio) {
+const token = speechToTextToken()
+  let data = qs.stringify({
+    'session': token,
+    'user_id': 'edu_precisa_mudar',
+    'channel': 'testChannel',
+    'url': audio
+  });
+
+  let config = {
+    method: 'post',
+    url: 'https://tools.inbot.com.br/speech/v1/audio/transcribe/url',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    data: data
+  };
+
+  await axios.request(config)
+    .then((response) => {
+      console.log(JSON.stringify(response.data[0][0]));
+      return (response.data[0][0]);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
+}
+
+async function speechToTextToken(){
+  let data = qs.stringify({
+    'client': 'edu_precisa_mudar',
+    'secret': 'senhavazia_precisa_mudar',
+    'channel': 'testChannel' 
+  });
+  
+  let config = {
+    method: 'post',
+    maxBodyLength: Infinity,
+    url: 'https://tools.inbot.com.br/speech/v1/auth/login',
+    headers: { 
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    data : data
+  };
+  
+  await axios.request(config)
+  .then((response) => {
+    console.log(JSON.stringify(response.data));
+    return (response.data.session_id)
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+  
+}
 
 module.exports = {
   sessionGenerator,
@@ -149,5 +207,6 @@ module.exports = {
   separarBlocos,
   extractQuickReplies,
   attachmentCreate,
-  isHasOwnProperty
+  isHasOwnProperty,
+  speechToText,
 };

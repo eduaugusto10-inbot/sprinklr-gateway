@@ -1,5 +1,4 @@
 const axios = require("axios");
-const FormData = require('form-data');
 
 const postFile = async function (bodyData) {
   let urlBot = "https://in.bot/mod_perl/api.pl";

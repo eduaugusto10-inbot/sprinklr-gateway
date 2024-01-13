@@ -22,9 +22,9 @@ class InstagramService {
     }
     const setVarStr = `full_name=${body.payload.senderProfile.name}`;
     // Verifica se usuario existe, caso nao cadastra
-    const dbUserState = await sprinklrState.getStateByUserId(body.payload.senderProfile.channelId,instance.bot_id);
+    const dbUserState = await sprinklrState.getStateByUserId(body.payload.senderProfile.channelId, instance.bot_id);
     console.log(new Date(), `Usuario: ${JSON.stringify(dbUserState)}`)
-    const dbUser = await this.createOrRetrieveState(dbUserState,instance,body)
+    const dbUser = await this.createOrRetrieveState(dbUserState, instance, body)
     console.log(dbUser)
     const sessionId = dbUser.session_id
     let payloadInbot = {
@@ -38,55 +38,59 @@ class InstagramService {
       url_webhook: instance.url_webhook,
     };
 
-  if (utils.isHasOwnProperty(body.payload.content,"text")){
-    payloadInbot.user_phrase= body.payload.content.text;
-  } else {
-     // Envio de arquivos
-     var data = new FormData()
-     console.log(body.payload.content.attachment)
-    data.append("file-upload-anexo", body.payload.content.attachment.url);
-    data.append("action", "file-upload");
-    data.append("bot_id", instance.bot_id);
-    data.append("bot_token", instance.bot_token);
-    data.append("mime_type", body.payload.content.attachment.type);
-    data.append("folder", "user-files");
-    data.append("session_id", sessionId);
-    data.append("user_id", body.payload.senderProfile.channelId);
-    data.append("channel", body.payload.channelType+"-sprinklr");
-    data.append("USER_PHONE", body.payload.senderProfile.channelId);
-    const uploadFile = await inbotService.postFile(data);
-    console.log(uploadFile)
-    payloadInbot.user_phrase= "AFTER_UPLOAD " + uploadFile.url + " mime_type=" + body.payload.content.attachment.type;
-  }
+    if (utils.isHasOwnProperty(body.payload.content, "text")) {
+      payloadInbot.user_phrase = body.payload.content.text;
+    } else {
+      // Envio de arquivos
+      var data = new FormData()
+      console.log(new Date(), `Attachment: ${body.payload.content.attachment}`)
+      data.append("file-upload-anexo", body.payload.content.attachment.url);
+      data.append("action", "file-upload");
+      data.append("bot_id", instance.bot_id);
+      data.append("bot_token", instance.bot_token);
+      data.append("mime_type", body.payload.content.attachment.type);
+      data.append("folder", "user-files");
+      data.append("session_id", sessionId);
+      data.append("user_id", body.payload.senderProfile.channelId);
+      data.append("channel", body.payload.channelType + "-sprinklr");
+      data.append("USER_PHONE", body.payload.senderProfile.channelId);
+      const uploadFile = await inbotService.postFile(data);
+      console.log(new Date(), `AFTER_UPLOAD: ${JSON.stringify(uploadFile)}`)
+      if (body.payload.content.attachment.type == "AUDIO") {
+        payloadInbot.user_phrase = await utils.speechToText(uploadFile.url)
+      } else {
+        payloadInbot.user_phrase = "AFTER_UPLOAD " + uploadFile.url + " mime_type=" + body.payload.content.attachment.type;
+      }
+    }
 
     console.log(payloadInbot);
     try {
-      await axios.post(instance.url_bot,payloadInbot).then(resp=>{  
+      await axios.post(instance.url_bot, payloadInbot).then(resp => {
         console.log(resp.data)
-        instagramBotService.postMessage(body,resp.data)
+        instagramBotService.postMessage(body, resp.data)
       })
       // console.log(body);
-    } catch (error) {}
+    } catch (error) { }
   }
 
-  async createOrRetrieveState(dbUserState,instance,userData) {
+  async createOrRetrieveState(dbUserState, instance, userData) {
     if (!dbUserState || dbUserState.length === 0) {
-      return await this.createNewState(instance,userData);
-    } else {                        
-      const resp = await this.recreateSessionIfNecessary(instance,dbUserState);
+      return await this.createNewState(instance, userData);
+    } else {
+      const resp = await this.recreateSessionIfNecessary(instance, dbUserState);
       console.log(new Date(), `dbUserState: ${JSON.stringify(resp)}`)
-      return resp 
+      return resp
     }
   }
 
-  async createNewState(instance,userData) { 
+  async createNewState(instance, userData) {
     const sprinklrState = new SprinklrStateDAO();
     const sessionId = utils.sessionGenerator(32);
     const channelId = userData.payload.senderProfile.channelId;
     const conversationId = userData.payload.conversationId;
     const messageId = userData.payload.messageId;
     try {
-      const user = await sprinklrState.createState(sessionId,instance.bot_id,channelId,channelId,0,conversationId,messageId)
+      const user = await sprinklrState.createState(sessionId, instance.bot_id, channelId, channelId, 0, conversationId, messageId)
       console.log(new Date(), `Usuario criado: ${JSON.stringify(user)}`)
       return user;
     } catch (error) {
@@ -94,8 +98,8 @@ class InstagramService {
     }
   }
 
-  async recreateSessionIfNecessary(instance,dbUserState){
-    
+  async recreateSessionIfNecessary(instance, dbUserState) {
+
     const sprinklrState = new SprinklrStateDAO()
     const now = new Date();
     let lastInteraction = new Date(dbUserState.last_interaction);
@@ -103,18 +107,18 @@ class InstagramService {
     lastInteraction = new Date(lastInteraction)
     console.log(`now: ${now}`)
     console.log(`Last interaction: ${lastInteraction}`)
-    if(now > lastInteraction){
+    if (now > lastInteraction) {
       const sessionId = utils.sessionGenerator(32);
       try {
-        await sprinklrState.updateUserSessionState(dbUserState.user_name,instance.bot_id,sessionId);
-        const response = await sprinklrState.getStateByUserId(dbUserState.user_name,instance.bot_id)
+        await sprinklrState.updateUserSessionState(dbUserState.user_name, instance.bot_id, sessionId);
+        const response = await sprinklrState.getStateByUserId(dbUserState.user_name, instance.bot_id)
         return response;
       } catch (error) {
-        
+
       }
-    } else{
-      await sprinklrState.updateUserState(dbUserState.user_name,instance.bot_id)
-      const response = await sprinklrState.getStateByUserId(dbUserState.user_name,instance.bot_id)
+    } else {
+      await sprinklrState.updateUserState(dbUserState.user_name, instance.bot_id)
+      const response = await sprinklrState.getStateByUserId(dbUserState.user_name, instance.bot_id)
       return response;
     }
   }
