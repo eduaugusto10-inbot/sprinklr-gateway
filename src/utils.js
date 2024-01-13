@@ -145,7 +145,7 @@ function isHasOwnProperty(o, i) {
 }
 
 async function speechToText(audio) {
-const token = speechToTextToken()
+const token = await speechToTextToken()
   let data = qs.stringify({
     'session': token,
     'user_id': 'edu_precisa_mudar',
