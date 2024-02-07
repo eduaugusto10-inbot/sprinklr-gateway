@@ -1,0 +1,71 @@
+{
+    "id": "65b83e05af1dd26dad142557",
+    "type": "case.create",
+    "payload": {
+        "id": "65b83e05af1dd26dad142431",
+        "caseNumber": 3798867,
+        "subject": "#3798867 Linkedin Fui promovida 🙏❤️\n\n",
+        "description": "Fui promovida 🙏❤️\n\n\" Gratidão é um sentimento poderoso e capaz de   mudar a vida de quem sente. Ser grato até pelas pequenas coisas, é o que faz ter esperanças em dias melhores e fé de que tudo já deu certo \" .\n\n\n#bradesco #gerenteassistente #entrenosvocevemprimeiro Bradesco ",
+        "version": 0,
+        "status": "Novo",
+        "priority": "Baixa",
+        "externalCaseInfo": {
+            "externalCases": []
+        },
+        "workflow": {
+            "customProperties": {
+                "61cc94b2163e057edf5552d3": [
+                    "No"
+                ],
+                "spr_uc_priority": [
+                    "Baixa"
+                ],
+                "spr_uc_status": [
+                    "Novo"
+                ],
+                "61cc94a6163e057edf554980": [
+                    "No"
+                ],
+                "61cc9497163e057edf553b87": [
+                    "Positivo"
+                ]
+            },
+            "queues": [
+                {
+                    "queueId": 101177,
+                    "assignmentTime": 1706573317157
+                },
+                {
+                    "queueId": 101183,
+                    "assignmentTime": 1706573317157
+                }
+            ]
+        },
+        "channelCustomProperties": [],
+        "contact": {
+            "id": "LINKEDIN_3niHjZM6Jh",
+            "name": "Miriam  Damasceno",
+            "channelType": "LINKEDIN",
+            "channelId": "3niHjZM6Jh",
+            "fromSnUserId": "3niHjZM6Jh"
+        },
+        "createdTime": 1706573317157,
+        "modifiedTime": 1706573317165,
+        "firstMessageId": "ACCOUNT_158351_1706572694590_LINKEDIN_68_urn:li:ugcPost:7157884677700104193",
+        "sentiment": 1,
+        "latestProfileMessageAssociatedTime": 1706572694590,
+        "conversationId": "urn:li:ugcPost:7157884677700104193",
+        "firstMessageAssociatedTime": 1706572694590,
+        "latestMessageAssociatedTime": 1706572694590,
+        "totalProcessingClockTime": 0,
+        "allEngagedUsersList": [],
+        "associatedFanMessageCount": 1,
+        "associatedBrandMessageCount": 0,
+        "associatedUserBrandMessageCount": 0,
+        "deleted": false
+    },
+    "eventTime": 1706573317177,
+    "subscriptionDetails": {
+        "subscriptionId": "65b7a8ded1aae442e971d708"
+    }
+}

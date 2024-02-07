@@ -1,0 +1,211 @@
+{
+    "data": [
+        {
+            "sourceType": "ACCOUNT",
+            "sourceId": 1820327,
+            "content": {
+                "text": "T do h",
+                "isRichText": false
+            },
+            "channelMessageId": "aWdfZAG1faXRlbToxOklHTWVzc2FnZAUlEOjE3ODQxNDYxNDMwNTE3MjM1OjM0MDI4MjM2Njg0MTcxMDMwMTI0NDI1OTMzNDUyMDU4MjUyMzIwODozMTQ4MTE1MjM2MzY1MTAxMTg4ODc1MjQ1MTczMzQyMjA4MAZDZD",
+            "channelType": "INSTAGRAM",
+            "accountType": "INSTAGRAM",
+            "channelCreatedTime": 1706596689250,
+            "senderProfile": {
+                "name": "SGBlue Investments",
+                "channelType": "INSTAGRAM",
+                "channelId": "7098868116843389",
+                "permalink": "https://scontent-iad3-2.cdninstagram.com/v/t51.2885-19/40730685_1490656041036360_8249448663017848832_n.jpg?stp=dst-jpg_s200x200&_nc_cat=100&ccb=1-7&_nc_sid=3fd06f&_nc_ohc=n-j9YNIGIiQAX-riReo&_nc_ht=scontent-iad3-2.cdninstagram.com&edm=ALmAK4EEAAAA&oh=00_AfA9di2UusRVuY98LJ_s1H0cH9zh_9iyMy3l5q1jGdAtUA&oe=65BD2D49",
+                "avatarUrl": "https://instagram.com/duzao.financas",
+                "followers": 135,
+                "following": 0,
+                "username": "duzao.financas",
+                "verified": false,
+                "unSubscribed": false,
+                "deleted": false,
+                "snCreatedTime": 0,
+                "snModifiedTime": 0,
+                "statusCount": 0,
+                "accountSpecificInfos": [
+                    {
+                        "accountId": 1820327
+                    }
+                ]
+            },
+            "receiverProfile": {
+                "name": "tabatadinizzz_2",
+                "channelType": "INSTAGRAM",
+                "channelId": "61417887683",
+                "avatarUrl": "https://www.instagram.com/tabatadinizzz_2",
+                "followers": 2,
+                "following": 1,
+                "username": "tabatadinizzz_2",
+                "unSubscribed": false,
+                "deleted": false,
+                "snCreatedTime": 0,
+                "snModifiedTime": 0,
+                "statusCount": 0,
+                "accountSpecificInfos": []
+            },
+            "language": "pt",
+            "messageId": "ACCOUNT_1820327_1706596689250_INSTAGRAM_320_aWdfZAG1faXRlbToxOklHTWVzc2FnZAUlEOjE3ODQxNDYxNDMwNTE3MjM1OjM0MDI4MjM2Njg0MTcxMDMwMTI0NDI1OTMzNDUyMDU4MjUyMzIwODozMTQ4MTE1MjM2MzY1MTAxMTg4ODc1MjQ1MTczMzQyMjA4MAZDZD",
+            "brandPost": false,
+            "createdTime": 1706596690304,
+            "modifiedTime": 1706596692873,
+            "textEntities": {},
+            "insights": {},
+            "workflow": {
+                "modifiedTime": 1706596692873,
+                "customProperties": {
+                    "_c_62a780173ce0ae09156889ad": [
+                        "Não"
+                    ],
+                    "61ce1f6036098d1126e56732": [
+                        "Private"
+                    ],
+                    "5be1ecb7e4b05c4fbe1f8c23": [
+                        "BOT"
+                    ],
+                    "61ce1f6036098d1126e56717": [
+                        "Yes"
+                    ],
+                    "61cc94b2163e057edf5552ca": [
+                        "No"
+                    ],
+                    "5df78ced92cb3e025cddd2b0": [
+                        "Score entre 21 e 40"
+                    ],
+                    "61ce1f6036098d1126e56720": [
+                        "Yes"
+                    ],
+                    "spr_im_predicted_csat_rating": [
+                        "50"
+                    ],
+                    "61ce1f5f36098d1126e566de": [
+                        "Instagram"
+                    ],
+                    "5f6e40934b19f47b28e24f3a": [
+                        "None"
+                    ],
+                    "61cc94b2163e057edf555318": [
+                        "Handled by Bot"
+                    ],
+                    "61f15c75e8062a2f2c4d8126": [
+                        "Média"
+                    ],
+                    "61ce1f6036098d1126e5673b": [
+                        "Social"
+                    ],
+                    "5f9c4c29ff7313172751af27": [
+                        "Published"
+                    ],
+                    "61ce1f5f36098d1126e5670e": [
+                        "No"
+                    ],
+                    "61ce1f6136098d1126e56957": [
+                        "0 - 500"
+                    ],
+                    "5f885749d61f971e1496c1b5": [
+                        "Organic"
+                    ],
+                    "5a576a79e4b06b5737014249": [
+                        "Instagram"
+                    ]
+                },
+                "queues": [
+                    {
+                        "queueId": 101161,
+                        "assignmentTime": 1706596690452
+                    },
+                    {
+                        "queueId": 101162,
+                        "assignmentTime": 1706596690452
+                    },
+                    {
+                        "queueId": 101151,
+                        "assignmentTime": 1706596690452
+                    },
+                    {
+                        "queueId": 101214,
+                        "assignmentTime": 1706596690452
+                    }
+                ],
+                "spaceWorkflows": []
+            },
+            "enrichments": {},
+            "conversationId": "aWdfZAG06MTpJR01lc3NhZA2VUaHJlYWQ6MTc4NDE0NjE0MzA1MTcyMzU6MzQwMjgyMzY2ODQxNzEwMzAxMjQ0MjU5MzM0NTIwNTgyNTIzMjA4",
+            "autoImported": false,
+            "autoResponse": false
+        }
+    ],
+    "errors": []
+},
+{
+    "accountId": 1820327,
+    "content": {
+        "attachment": {
+            "type": "QUICK_REPLY",
+            "message": "Sobre qual assunto vamos conversar agora? \n",
+            "quickReplies": [
+                {
+                    "title": "Adquirir Cartão de Crédito",
+                    "subtitle": "",
+                    "actionDetail": {
+                        "action": "TEXT"
+                    }
+                },
+                {
+                    "title": "Braland",
+                    "subtitle": "",
+                    "actionDetail": {
+                        "action": "TEXT"
+                    }
+                },
+                {
+                    "title": "Lollapalooza",
+                    "subtitle": "",
+                    "actionDetail": {
+                        "action": "TEXT"
+                    }
+                },
+                {
+                    "title": "Chave de Segurança",
+                    "subtitle": "",
+                    "actionDetail": {
+                        "action": "TEXT"
+                    }
+                },
+                {
+                    "title": "Empréstimo",
+                    "subtitle": "",
+                    "actionDetail": {
+                        "action": "TEXT"
+                    }
+                },
+                {
+                    "title": "Abrir Conta",
+                    "subtitle": "",
+                    "actionDetail": {
+                        "action": "TEXT"
+                    }
+                },
+                {
+                    "title": "Trabalhe Conosco",
+                    "subtitle": "",
+                    "actionDetail": {
+                        "action": "TEXT"
+                    }
+                }
+            ]
+        }
+    },
+    "taxonomy": {
+        "campaignId": "6667_10115"
+    },
+    "inReplyToMessageId": "aWdfZAG1faXRlbToxOklHTWVzc2FnZAUlEOjE3ODQxNDYxNDMwNTE3MjM1OjM0MDI4MjM2Njg0MTcxMDMwMTI0NDI1OTMzNDUyMDU4MjUyMzIwODozMTQ4MTQwMjIzMzUxODMyNTQyNDMyMzgzNjMxNTE3Mjg2NAZDZD",
+    "toProfile": {
+        "channelType": "INSTAGRAM",
+        "channelId": "7098868116843389",
+        "screenName": "SGBlue Investments"
+    }
+}

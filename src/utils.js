@@ -1,6 +1,7 @@
 const { createHash } = require("node:crypto");
 const axios = require('axios');
 const qs = require('qs');
+const { SprinklrCredentialsDAO } = require("./models/SprinklrCredentialsDAO");
 
 function sessionGenerator(maxLen) {
   return createHash("sha3-256")
@@ -144,7 +145,7 @@ function isHasOwnProperty(o, i) {
   return !isEmptyObject(o) && Object.prototype.hasOwnProperty.call(o, i);
 }
 
-const speechToText = async function(audio) {
+const speechToText = async function (audio) {
   try {
     const token = await speechToTextToken();
 
@@ -166,7 +167,7 @@ const speechToText = async function(audio) {
 
     const response = await axios.request(config);
     const transcription = response.data[0][0];
-    
+
     console.log(JSON.stringify(transcription));
     return transcription;
   } catch (error) {
@@ -199,7 +200,111 @@ const speechToTextToken = async function () {
     console.error(error);
     throw error; // lança o erro novamente para que o chamador possa lidar com ele
   }
+}
+const checkControl = async function (caseId) {
+  try {
+    const sprinklrCredentials = new SprinklrCredentialsDAO();
+    let credentials = await sprinklrCredentials.getCredentials(); //dados retorno do banco
+    credentials = credentials[0];
+
+    const url_sprinklr = 'https://api2.sprinklr.com/api/v2/thread/get-controlling-participant';
+    const headers = {
+      Key: credentials.client_id,
+      Authorization: `Bearer ${credentials.token}`,
+    };
+
+    const body = {
+      entityType: 'CASE',
+      entityId: caseId,
+    };
+
+    const response = await axios.post(url_sprinklr, body, { headers });
+    return response.data;
+  } catch (error) {
+    if (error.response) {
+      console.error(error.response.data);
+      return error.response.data;
+    } else if (error.request) {
+      console.error('Sem resposta do servidor:', error.request);
+      return { error: 'Sem resposta do servidor' };
+    } else {
+      console.error('Erro ao processar requisição:', error.message);
+      return { error: 'Erro ao processar requisição' };
+    }
+  }
 };
+
+const lastMessage = async function (messageId, untilDate) {
+  try {
+    const sprinklrCredentials = new SprinklrCredentialsDAO();
+    let credentials = await sprinklrCredentials.getCredentials(); //dados retorno do banco
+    credentials = credentials[0];
+
+    const url_sprinklr = 'https://api2.sprinklr.com/api/v2/message/conversations';
+    const headers = {
+      Key: credentials.client_id,
+      Authorization: `Bearer ${credentials.token}`,
+    };
+
+    const body = {
+      messageId: messageId,
+      sinceDate: untilDate,
+      untilDate: untilDate,
+      start: 0,
+      rows: 1,
+    };
+
+    const response = await axios.post(url_sprinklr, body, { headers });
+    console.log(new Date(),`Resposta lastMessage: ${JSON.stringify(response.data.data[0])}`)
+    return response.data.data[0];
+  } catch (error) {
+    if (error.response) {
+      console.log(error.response.data);
+      return error.response.data;
+    } else if (error.request) {
+      console.log('Sem resposta do servidor:', error.request);
+      return { error: 'Sem resposta do servidor' };
+    } else {
+      console.log('Erro ao processar requisição:', error.message);
+      return { error: 'Erro ao processar requisição' };
+    }
+  }
+};
+const changeParticipantControl = async function (caseId) {
+  try {
+    const sprinklrCredentials = new SprinklrCredentialsDAO();
+    let credentials = await sprinklrCredentials.getCredentials(); //dados retorno do banco
+    credentials = credentials[0];
+
+    const url_sprinklr = 'https://api2.sprinklr.com/api/v2/thread/pass-control';
+    const headers = {
+      Key: credentials.client_id,
+      Authorization: `Bearer ${credentials.token}`,
+    };
+
+    const body = {
+      "entityType": "CASE",
+      "entityId": caseId,
+      "participantId": "Sprinklr"
+  }
+
+    const response = await axios.post(url_sprinklr, body, { headers });
+    console.log(new Date(),`Resposta pass control: ${JSON.stringify(response.data)}`)
+    return response.data;
+  } catch (error) {
+    if (error.response) {
+      console.log(error.response.data);
+      return error.response.data;
+    } else if (error.request) {
+      console.log('Sem resposta do servidor:', error.request);
+      return { error: 'Sem resposta do servidor' };
+    } else {
+      console.log('Erro ao processar requisição:', error.message);
+      return { error: 'Erro ao processar requisição' };
+    }
+  }
+};
+
 
 
 module.exports = {
@@ -210,4 +315,7 @@ module.exports = {
   attachmentCreate,
   isHasOwnProperty,
   speechToText,
+  checkControl,
+  lastMessage,
+  changeParticipantControl,
 };

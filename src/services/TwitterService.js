@@ -10,7 +10,16 @@ class TwitterService {
     const sprinklrState = new SprinklrStateDAO();
     const twitterBotService = new TwitterBotService();
 
-    const channelID = body.payload.receiverProfile.channelId;
+    const lastMessage = await utils.lastMessage(body.payload.uCase.firstMessageId,body.payload.uCase.latestMessageAssociatedTime)
+    console.log(new Date(), `Last message: ${JSON.stringify(lastMessage)}`)
+    if(lastMessage==undefined){
+      return "Nenhuma mensagem para enviar";
+    }
+
+    const regex = /^([^_]*)/gi 
+    const respRegex = body.payload.uCase.conversationId.match(regex);
+    const channelID = respRegex;
+    
     let instance = await sprinklrInstance.getInstanceByChannelID(channelID); //dados retorno do banco
     instance = instance[0];
     console.log(new Date(), `Instance data ${JSON.stringify(instance)}`);
@@ -18,20 +27,30 @@ class TwitterService {
       console.log(new Date(), `Bot ${channelID} não cadastrado`);
       return "Bot não cadastrado";
     }
-    const setVarStr = `full_name=${body.payload.senderProfile.name}`;
+
+    let checkControl = [];
+    if(body.type=="message.association.change"){
+      checkControl = await utils.checkControl(body.payload.uCase.id);
+      if(checkControl.data.controllingParticipantId!=instance.participant_id){
+        return "Conversa esta com outro participante";
+      }
+    }
+    console.log(new Date(), `Controle participant ${JSON.stringify(checkControl)}`)
+
+    const setVarStr = `full_name=${lastMessage.senderProfile.name}`;
     // Verifica se usuario existe, caso nao cadastra
-    const dbUserState = await sprinklrState.getStateByUserId(body.payload.senderProfile.channelId,instance.bot_id);
+    const dbUserState = await sprinklrState.getStateByUserId(body.payload.uCase.contact.channelId,instance.bot_id);
     console.log(new Date(), `Usuario: ${JSON.stringify(dbUserState)}`)
     const dbUser = await this.createOrRetrieveState(dbUserState,instance,body)
-    console.log(dbUser)
+    console.log(JSON.stringify(lastMessage))
     const sessionId = dbUser.session_id
     let payloadInbot = {
       bot_id: instance.bot_id,
-      user_id: body.payload.senderProfile.channelId,
+      user_id: lastMessage.senderProfile.channelId,
       bot_server_type: instance.bot_server_type,
       bot_token: instance.bot_token,
       channel:"twitter_sprinklr",// body.payload.channelType==="TWITTER"?"sprinklr-twitter":"sprinklr-instagram",
-      user_phrase: body.payload.content.text, 
+      user_phrase: "oi",//lastMessage.content.text, 
       setvar: setVarStr,
       session_id: sessionId,
       url_webhook: instance.url_webhook,
@@ -39,9 +58,8 @@ class TwitterService {
     console.log(payloadInbot);
     try {
       await axios.post(instance.url_bot,payloadInbot).then(resp=>{
-        console.log("JSON.stringify(resp.data)")
-        console.log(JSON.stringify(resp.data))
-        twitterBotService.postMessage(body,resp.data)
+        console.log(new Date(),`Resposta inbot: ${JSON.stringify(resp.data)}`)
+        twitterBotService.postMessage(lastMessage,resp.data,body)
       })
       // console.log(body);
     } catch (error) {}

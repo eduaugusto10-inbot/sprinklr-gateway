@@ -39,9 +39,13 @@ class TwitterBotService {
     }
   }
 
-  async postMessage(body, respInbot) {
+  async postMessage(body, respInbot, messageAssociationChange) {
     const sprinklrInstance = new SprinklrInstanceDAO();
-    const channelID = body.payload.receiverProfile.channelId;
+
+    const regex = /^([^_]*)/gi 
+    const respRegex = messageAssociationChange.payload.uCase.conversationId.match(regex);
+    const channelID = respRegex;
+
     let instance = await sprinklrInstance.getInstanceByChannelID(channelID); //dados retorno do banco
     instance = instance[0];
     console.log(`Resp: ${JSON.stringify(respInbot.resp)}`);
@@ -72,11 +76,11 @@ class TwitterBotService {
         taxonomy: {
           campaignId: instance.campaign_id,
         },
-        inReplyToMessageId: body.payload.messageId,
+        inReplyToMessageId: body.messageId,
         toProfile: {
           channelType: instance.channel_type,
-          channelId: body.payload.senderProfile.channelId,
-          screenName: body.payload.senderProfile.name,
+          channelId: body.senderProfile.channelId,
+          screenName: body.senderProfile.name,
         },
       };
 
@@ -95,7 +99,11 @@ class TwitterBotService {
           quickReplies: buttons,
         };
       }
-
+      if(payloadSprinklr.content.text.includes("[CMD:HANDOVER]")){
+        payloadSprinklr.content.text = bloco.message.replace("[CMD:HANDOVER]", "");
+        const changeParticipantControl= await utils.changeParticipantControl(messageAssociationChange.payload.uCase.id);
+        console.log(new Date(), `Change participant control: ${JSON.stringify(changeParticipantControl)}`)
+      }
       console.log(`Envio do texto: ${JSON.stringify(payloadSprinklr)}`);
       this.sendMessage(payloadSprinklr);
     }

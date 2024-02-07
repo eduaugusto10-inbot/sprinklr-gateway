@@ -1,0 +1,74 @@
+{
+    "id": "65b836b2af1dd26dad45443d",
+    "type": "case.create",
+    "payload": {
+        "id": "65b836b2af1dd26dad4542cf",
+        "caseNumber": 3798829,
+        "subject": "#3798829 Twitter até quando a gente q",
+        "description": "até quando a gente quer pagar... o caralho do @Bradesco complica",
+        "version": 0,
+        "status": "Novo",
+        "priority": "Média",
+        "externalCaseInfo": { 
+            "externalCases": []
+        },
+        "workflow": {
+            "customProperties": {
+                "spr_uc_priority": [
+                    "Média"
+                ],
+                "61cc9497163e057edf553b87": [
+                    "Negativo"
+                ],
+                "spr_uc_eng_score": [
+                    "0"
+                ],
+                "61cc94b2163e057edf5552d3": [
+                    "No"
+                ],
+                "spr_uc_status": [
+                    "Novo"
+                ],
+                "61cc94a6163e057edf554980": [
+                    "No"
+                ]
+            },
+            "queues": [
+                {
+                    "queueId": 101177,
+                    "assignmentTime": 1706571442539
+                },
+                {
+                    "queueId": 101183,
+                    "assignmentTime": 1706571442539
+                }
+            ]
+        },
+        "channelCustomProperties": [],
+        "contact": {
+            "id": "TWITTER_1198735736192806916",
+            "name": "EuRafaMatata",
+            "channelType": "TWITTER",
+            "channelId": "1198735736192806916",
+            "fromSnUserId": "1198735736192806916"
+        },
+        "createdTime": 1706571442539,
+        "modifiedTime": 1706571442550,
+        "firstMessageId": "ACCOUNT_158344_1706571439843_TWITTER_4_1752113726877048907",
+        "sentiment": -1,
+        "latestProfileMessageAssociatedTime": 1706571439843,
+        "conversationId": "1752113726877048907",
+        "firstMessageAssociatedTime": 1706571439843,
+        "latestMessageAssociatedTime": 1706571439843,
+        "totalProcessingClockTime": 0,
+        "allEngagedUsersList": [],
+        "associatedFanMessageCount": 1,
+        "associatedBrandMessageCount": 0,
+        "associatedUserBrandMessageCount": 0,
+        "deleted": false
+    },
+    "eventTime": 1706571442573,
+    "subscriptionDetails": {
+        "subscriptionId": "65b7a8ded1aae442e971d708"
+    }
+}

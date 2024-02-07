@@ -1,0 +1,70 @@
+{
+    "id": "65b87679af1dd26dad5a40ed",
+    "type": "case.create",
+    "payload": {
+        "id": "65b87679af1dd26dad5a3f03",
+        "caseNumber": 3798981,
+        "subject": "#3798981 Instagram Olá",
+        "description": "Olá",
+        "version": 0,
+        "status": "Novo",
+        "externalCaseInfo": {
+            "externalCases": []
+        },
+        "workflow": {
+            "customProperties": {
+                "61cc94b2163e057edf5552d3": [
+                    "No"
+                ],
+                "spr_uc_status": [
+                    "Novo"
+                ],
+                "61ce1f6036098d1126e56717": [
+                    "Yes"
+                ],
+                "61cc94a6163e057edf554980": [
+                    "No"
+                ],
+                "61cc9497163e057edf553b87": [
+                    "Neutro"
+                ]
+            },
+            "queues": [
+                {
+                    "queueId": 101177,
+                    "assignmentTime": 1706587769546
+                },
+                {
+                    "queueId": 101183,
+                    "assignmentTime": 1706587769546
+                }
+            ]
+        },
+        "channelCustomProperties": [],
+        "contact": {
+            "id": "INSTAGRAM_7098868116843389",
+            "name": "duzao.financas",
+            "channelType": "INSTAGRAM",
+            "channelId": "7098868116843389",
+            "fromSnUserId": "7098868116843389"
+        },
+        "createdTime": 1706587769546,
+        "modifiedTime": 1706587769558,
+        "firstMessageId": "ACCOUNT_1820327_1706587766552_INSTAGRAM_320_aWdfZAG1faXRlbToxOklHTWVzc2FnZAUlEOjE3ODQxNDYxNDMwNTE3MjM1OjM0MDI4MjM2Njg0MTcxMDMwMTI0NDI1OTMzNDUyMDU4MjUyMzIwODozMTQ4MDk4Nzc2ODkxNTYzMDY2NDU1MTk5MTMzMDQ3MTkzNgZDZD",
+        "sentiment": 0,
+        "latestProfileMessageAssociatedTime": 1706587766552,
+        "conversationId": "aWdfZAG06MTpJR01lc3NhZA2VUaHJlYWQ6MTc4NDE0NjE0MzA1MTcyMzU6MzQwMjgyMzY2ODQxNzEwMzAxMjQ0MjU5MzM0NTIwNTgyNTIzMjA4",
+        "firstMessageAssociatedTime": 1706587766552,
+        "latestMessageAssociatedTime": 1706587766552,
+        "totalProcessingClockTime": 0,
+        "allEngagedUsersList": [],
+        "associatedFanMessageCount": 1,
+        "associatedBrandMessageCount": 0,
+        "associatedUserBrandMessageCount": 0,
+        "deleted": false
+    },
+    "eventTime": 1706587769573,
+    "subscriptionDetails": {
+        "subscriptionId": "65b7a8ded1aae442e971d708"
+    }
+}

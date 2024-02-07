@@ -17,6 +17,7 @@ class InstagramBotService {
         Authorization: `Bearer ${credentials.token}`,
       },
     };
+    console.log(new Date(),`Payload Sprinklr: ${JSON.stringify(payloadSprinklr)}`)
     try {
       axios
         .post(url_sprinklr, payloadSprinklr, headers)
@@ -39,9 +40,9 @@ class InstagramBotService {
     }
   }
 
-  async postMessage(body, respInbot) {
+  async postMessage(body, respInbot,messageAssociationChange) {
     const sprinklrInstance = new SprinklrInstanceDAO();
-    const channelID = body.payload.receiverProfile.channelId;
+    const channelID = body.receiverProfile.channelId;
     let instance = await sprinklrInstance.getInstanceByChannelID(channelID); //dados retorno do banco
     instance = instance[0];
     console.log(`retorno instance ${JSON.stringify(respInbot)}`);
@@ -68,11 +69,11 @@ class InstagramBotService {
         taxonomy: {
           campaignId: instance.campaign_id,
         },
-        inReplyToMessageId: body.payload.messageId,
+        inReplyToMessageId: body.messageId,
         toProfile: {
           channelType: instance.channel_type,
-          channelId: body.payload.senderProfile.channelId,
-          screenName: body.payload.senderProfile.name,
+          channelId: body.senderProfile.channelId,
+          screenName: body.senderProfile.name,
         },
       };
 
@@ -91,8 +92,12 @@ class InstagramBotService {
         };
       } else {
         payloadSprinklr.content.text = bloco.message+" \n"+(bloco.media_type === "video"?bloco.media:"")
+        if(bloco.message.includes("[CMD:HANDOVER]")){
+          //payloadSprinklr.content.text = bloco.message.replace("[CMD:HANDOVER]", "");
+          const changeParticipantControl= await utils.changeParticipantControl(messageAssociationChange.payload.uCase.id);
+          //console.log(new Date(), `Change participant control: ${JSON.stringify(changeParticipantControl)}`)
+        }
       }
-
       console.log(`Envio do texto: ${JSON.stringify(payloadSprinklr)}`);
       this.sendMessage(payloadSprinklr);
     }

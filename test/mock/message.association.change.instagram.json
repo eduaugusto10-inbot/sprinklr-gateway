@@ -1,0 +1,111 @@
+{
+    "id": "65b87a3aaf1dd26dadc6ff75",
+    "type": "message.association.change",
+    "payload": {
+        "uCase": {
+            "id": "65b87679af1dd26dad5a3f03",
+            "caseNumber": 3798981,
+            "subject": "#3798981 Instagram Olá",
+            "description": "Olá",
+            "version": 7,
+            "status": "Novo",
+            "externalCaseInfo": {
+                "externalCases": []
+            },
+            "workflow": {
+                "customProperties": {
+                    "61cc94b2163e057edf55532f": [
+                        "Neutral"
+                    ],
+                    "_c_62a780173ce0ae09156889ad": [
+                        "Não"
+                    ],
+                    "61ce1f6036098d1126e56717": [
+                        "Yes"
+                    ],
+                    "spr_uc_predicted_csat_rating": [
+                        "50"
+                    ],
+                    "61cc94b2163e057edf5552dc": [
+                        "No"
+                    ],
+                    "61cc94a6163e057edf554980": [
+                        "No"
+                    ],
+                    "61ce1f5f36098d1126e566de": [
+                        "Instagram"
+                    ],
+                    "61ce1f6036098d1126e5673b": [
+                        "Social"
+                    ],
+                    "61cc9497163e057edf553b87": [
+                        "Neutro"
+                    ],
+                    "61cc94b2163e057edf5552c1": [
+                        "Private"
+                    ],
+                    "61cc94b2163e057edf5552d3": [
+                        "No"
+                    ],
+                    "61cc94b1163e057edf5551e8": [
+                        "Privada"
+                    ],
+                    "61ce1f5f36098d1126e5670e": [
+                        "No"
+                    ],
+                    "spr_uc_status": [
+                        "Novo"
+                    ],
+                    "spr_uc_initial_csat_rating": [
+                        "50"
+                    ]
+                },
+                "queues": [
+                    {
+                        "queueId": 101177,
+                        "assignmentTime": 1706587769546
+                    },
+                    {
+                        "queueId": 101157,
+                        "assignmentTime": 1706587769592
+                    },
+                    {
+                        "queueId": 101183,
+                        "assignmentTime": 1706588730413
+                    }
+                ]
+            },
+            "channelCustomProperties": [],
+            "contact": {
+                "id": "INSTAGRAM_7098868116843389",
+                "name": "duzao.financas",
+                "channelType": "INSTAGRAM",
+                "channelId": "7098868116843389",
+                "fromSnUserId": "7098868116843389"
+            },
+            "createdTime": 1706587769546,
+            "modifiedTime": 1706588730414,
+            "firstMessageId": "ACCOUNT_1820327_1706587766552_INSTAGRAM_320_aWdfZAG1faXRlbToxOklHTWVzc2FnZAUlEOjE3ODQxNDYxNDMwNTE3MjM1OjM0MDI4MjM2Njg0MTcxMDMwMTI0NDI1OTMzNDUyMDU4MjUyMzIwODozMTQ4MDk4Nzc2ODkxNTYzMDY2NDU1MTk5MTMzMDQ3MTkzNgZDZD",
+            "sentiment": 0,
+            "latestProfileMessageAssociatedTime": 1706588726830,
+            "conversationId": "aWdfZAG06MTpJR01lc3NhZA2VUaHJlYWQ6MTc4NDE0NjE0MzA1MTcyMzU6MzQwMjgyMzY2ODQxNzEwMzAxMjQ0MjU5MzM0NTIwNTgyNTIzMjA4",
+            "firstMessageAssociatedTime": 1706587766552,
+            "latestMessageAssociatedTime": 1706588726830,
+            "firstUserBrandResponseCreationTime": 1706587769000,
+            "avgCaseResponseSLA": 2448,
+            "totalProcessingClockTime": 0,
+            "allEngagedUsersList": [],
+            "associatedFanMessageCount": 2,
+            "associatedBrandMessageCount": 1,
+            "associatedUserBrandMessageCount": 1,
+            "deleted": false
+        },
+        "associatedMessageIds": [
+            "ACCOUNT_1820327_1706588726830_INSTAGRAM_320_aWdfZAG1faXRlbToxOklHTWVzc2FnZAUlEOjE3ODQxNDYxNDMwNTE3MjM1OjM0MDI4MjM2Njg0MTcxMDMwMTI0NDI1OTMzNDUyMDU4MjUyMzIwODozMTQ4MTAwNTQ4MjkyMTczMzM5MzMwNzE3MTQwMjI4NTA1NgZDZD"
+        ]
+    },
+    "eventTime": 1706588730439,
+    "subscriptionDetails": {
+        "subscriptionId": "65b7a8ded1aae442e971d708"
+    }
+}
