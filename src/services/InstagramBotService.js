@@ -10,14 +10,17 @@ class InstagramBotService {
     credentials = credentials[0];
 
     console.log(JSON.stringify(payloadSprinklr));
-    const url_sprinklr = "https://api2.sprinklr.com/api/v2/publishing/message";
+    const url_sprinklr = "https://api3.sprinklr.com/api/v2/publishing/message";
     const headers = {
       headers: {
         Key: credentials.client_id,
         Authorization: `Bearer ${credentials.token}`,
       },
     };
-    console.log(new Date(),`Payload Sprinklr: ${JSON.stringify(payloadSprinklr)}`)
+    console.log(
+      new Date(),
+      `Payload Sprinklr: ${JSON.stringify(payloadSprinklr)}`
+    );
     try {
       axios
         .post(url_sprinklr, payloadSprinklr, headers)
@@ -40,7 +43,7 @@ class InstagramBotService {
     }
   }
 
-  async postMessage(body, respInbot,messageAssociationChange) {
+  async postMessage(body, respInbot, messageAssociationChange) {
     const sprinklrInstance = new SprinklrInstanceDAO();
     const channelID = body.receiverProfile.channelId;
     let instance = await sprinklrInstance.getInstanceByChannelID(channelID); //dados retorno do banco
@@ -54,7 +57,7 @@ class InstagramBotService {
       quickReply[1]?.map((v) => {
         buttons.push({
           title: v.title,
-          subtitle: "", //v.metadata, 
+          subtitle: "", //v.metadata,
           actionDetail: {
             action: "TEXT",
           },
@@ -87,14 +90,22 @@ class InstagramBotService {
       if (buttons.length > 0) {
         payloadSprinklr.content.attachment = {
           type: "QUICK_REPLY",
-          message: quickReply[0]+" \n"+(bloco.media_type === "video"?bloco.media:""),
+          message:
+            quickReply[0] +
+            " \n" +
+            (bloco.media_type === "video" ? bloco.media : ""),
           quickReplies: buttons,
         };
       } else {
-        payloadSprinklr.content.text = bloco.message+" \n"+(bloco.media_type === "video"?bloco.media:"")
-        if(bloco.message.includes("[CMD:HANDOVER]")){
+        payloadSprinklr.content.text =
+          bloco.message +
+          " \n" +
+          (bloco.media_type === "video" ? bloco.media : "");
+        if (bloco.message.includes("[CMD:HANDOVER]")) {
           //payloadSprinklr.content.text = bloco.message.replace("[CMD:HANDOVER]", "");
-          const changeParticipantControl= await utils.changeParticipantControl(messageAssociationChange.payload.uCase.id);
+          const changeParticipantControl = await utils.changeParticipantControl(
+            messageAssociationChange.payload.uCase.id
+          );
           //console.log(new Date(), `Change participant control: ${JSON.stringify(changeParticipantControl)}`)
         }
       }
@@ -118,10 +129,10 @@ class InstagramBotService {
     const headers = {
       headers: {
         Key: credentials.client_id,
-        Authorization: `Bearer ${credentials.token}`
+        Authorization: `Bearer ${credentials.token}`,
       },
     };
-    const url_sprinklr = "https://api2.sprinklr.com/api/v2/publishing/message";
+    const url_sprinklr = "https://api3.sprinklr.com/api/v2/publishing/message";
     try {
       axios
         .post(url_sprinklr, payloadSprinklr, headers)

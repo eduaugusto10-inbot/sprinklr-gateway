@@ -3,7 +3,10 @@ const { InstagramService } = require("../services/InstagramService");
 
 class WebhookController {
   async getMessage(req, res) {
-    console.log(new Date(), `Rede social: ${JSON.stringify(req.body)}`);
+    console.log(
+      new Date(),
+      `[getMessage] Rede social: ${JSON.stringify(req.body)}`
+    );
     const channelType = req.body?.payload?.uCase?.contact?.channelType
       ? req.body.payload.uCase.contact.channelType
       : "";
@@ -12,13 +15,13 @@ class WebhookController {
 
     try {
       switch (channelType) {
-       // case "TWITTER":
-         // console.log(new Date(), `Rede social: ${JSON.stringify(req.body)}`);
-          // if (req.body.payload?.receiverProfile)
-          //  twitterService.getMessage(req.body);
-          //break;
+        // case "TWITTER":
+        // console.log(new Date(), `Rede social: ${JSON.stringify(req.body)}`);
+        // if (req.body.payload?.receiverProfile)
+        //  twitterService.getMessage(req.body);
+        //break;
         case "INSTAGRAM":
-            instagramService.getMessage(req.body);
+          instagramService.getMessage(req.body);
           break;
         default:
           break;
@@ -26,7 +29,10 @@ class WebhookController {
     } catch (error) {
       console.log(Date(), `Error: ${error}`);
     } finally {
-      res.sendStatus(200);
+      res.send({
+        status: "success",
+        message: "Message received",
+      });
     }
   }
 }

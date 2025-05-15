@@ -1,6 +1,6 @@
 const { createHash } = require("node:crypto");
-const axios = require('axios');
-const qs = require('qs');
+const axios = require("axios");
+const qs = require("qs");
 const { SprinklrCredentialsDAO } = require("./models/SprinklrCredentialsDAO");
 
 function sessionGenerator(maxLen) {
@@ -69,7 +69,7 @@ function separarBlocos(texto, index = 0, blocos = [], firstCall = true) {
 
 function attachmentCreate(orig) {
   const regexVideo = /<video\s?.*?<\/video\s*>/gi;
-  const regexImage = /<img\s?.*?\/>/gi
+  const regexImage = /<img\s?.*?\/>/gi;
   let mediaType = "";
   let mediaURLs;
   let text = orig;
@@ -91,9 +91,10 @@ function attachmentCreate(orig) {
     mediaURLs = orig.match(regexHttps)[0] || [];
     text = orgi.replace(regexImage, "");
   }
-  return mediaType !== '' ? [{ url: mediaURLs, mediaType: mediaType, text: text }] : [];
+  return mediaType !== ""
+    ? [{ url: mediaURLs, mediaType: mediaType, text: text }]
+    : [];
 }
-
 
 function extractQuickReplies(orig) {
   let match = orig.match(
@@ -140,7 +141,6 @@ function isEmptyObject(obj) {
   return true;
 }
 
-
 function isHasOwnProperty(o, i) {
   return !isEmptyObject(o) && Object.prototype.hasOwnProperty.call(o, i);
 }
@@ -150,19 +150,19 @@ const speechToText = async function (audio) {
     const token = await speechToTextToken();
 
     const data = qs.stringify({
-      'session': token,
-      'user_id': 'edu_precisa_mudar',
-      'channel': 'testChannel',
-      'url': audio
+      session: token,
+      user_id: "edu_precisa_mudar",
+      channel: "testChannel",
+      url: audio,
     });
 
     const config = {
-      method: 'post',
-      url: 'https://tools.inbot.com.br/speech/v1/audio/transcribe/url',
+      method: "post",
+      url: "https://tools.inbot.com.br/speech/v1/audio/transcribe/url",
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
+        "Content-Type": "application/x-www-form-urlencoded",
       },
-      data: data
+      data: data,
     };
 
     const response = await axios.request(config);
@@ -174,24 +174,23 @@ const speechToText = async function (audio) {
     console.error(error);
     throw error; // lança o erro novamente para que o chamador possa lidar com ele
   }
-}
-
+};
 
 const speechToTextToken = async function () {
   try {
     const data = qs.stringify({
-      'client': 'edu_precisa_mudar',
-      'secret': 'senhavazia_precisa_mudar',
-      'channel': 'testChannel'
+      client: "edu_precisa_mudar",
+      secret: "senhavazia_precisa_mudar",
+      channel: "testChannel",
     });
 
     const config = {
-      method: 'post',
-      url: 'https://tools.inbot.com.br/speech/v1/auth/login',
+      method: "post",
+      url: "https://tools.inbot.com.br/speech/v1/auth/login",
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
+        "Content-Type": "application/x-www-form-urlencoded",
       },
-      data: data
+      data: data,
     };
 
     const response = await axios.request(config);
@@ -200,21 +199,22 @@ const speechToTextToken = async function () {
     console.error(error);
     throw error; // lança o erro novamente para que o chamador possa lidar com ele
   }
-}
+};
 const checkControl = async function (caseId) {
   try {
     const sprinklrCredentials = new SprinklrCredentialsDAO();
     let credentials = await sprinklrCredentials.getCredentials(); //dados retorno do banco
     credentials = credentials[0];
 
-    const url_sprinklr = 'https://api2.sprinklr.com/api/v2/thread/get-controlling-participant';
+    const url_sprinklr =
+      "https://api3.sprinklr.com/api/v2/thread/get-controlling-participant";
     const headers = {
       Key: credentials.client_id,
       Authorization: `Bearer ${credentials.token}`,
     };
 
     const body = {
-      entityType: 'CASE',
+      entityType: "CASE",
       entityId: caseId,
     };
 
@@ -225,11 +225,11 @@ const checkControl = async function (caseId) {
       console.error(error.response.data);
       return error.response.data;
     } else if (error.request) {
-      console.error('Sem resposta do servidor:', error.request);
-      return { error: 'Sem resposta do servidor' };
+      console.error("Sem resposta do servidor:", error.request);
+      return { error: "Sem resposta do servidor" };
     } else {
-      console.error('Erro ao processar requisição:', error.message);
-      return { error: 'Erro ao processar requisição' };
+      console.error("Erro ao processar requisição:", error.message);
+      return { error: "Erro ao processar requisição" };
     }
   }
 };
@@ -240,7 +240,8 @@ const lastMessage = async function (messageId, untilDate) {
     let credentials = await sprinklrCredentials.getCredentials(); //dados retorno do banco
     credentials = credentials[0];
 
-    const url_sprinklr = 'https://api2.sprinklr.com/api/v2/message/conversations';
+    const url_sprinklr =
+      "https://api3.sprinklr.com/api/v2/message/conversations";
     const headers = {
       Key: credentials.client_id,
       Authorization: `Bearer ${credentials.token}`,
@@ -255,18 +256,21 @@ const lastMessage = async function (messageId, untilDate) {
     };
 
     const response = await axios.post(url_sprinklr, body, { headers });
-    console.log(new Date(),`Resposta lastMessage: ${JSON.stringify(response.data.data[0])}`)
+    console.log(
+      new Date(),
+      `Resposta lastMessage: ${JSON.stringify(response.data.data[0])}`
+    );
     return response.data.data[0];
   } catch (error) {
     if (error.response) {
       console.log(error.response.data);
       return error.response.data;
     } else if (error.request) {
-      console.log('Sem resposta do servidor:', error.request);
-      return { error: 'Sem resposta do servidor' };
+      console.log("Sem resposta do servidor:", error.request);
+      return { error: "Sem resposta do servidor" };
     } else {
-      console.log('Erro ao processar requisição:', error.message);
-      return { error: 'Erro ao processar requisição' };
+      console.log("Erro ao processar requisição:", error.message);
+      return { error: "Erro ao processar requisição" };
     }
   }
 };
@@ -276,36 +280,37 @@ const changeParticipantControl = async function (caseId) {
     let credentials = await sprinklrCredentials.getCredentials(); //dados retorno do banco
     credentials = credentials[0];
 
-    const url_sprinklr = 'https://api2.sprinklr.com/api/v2/thread/pass-control';
+    const url_sprinklr = "https://api3.sprinklr.com/api/v2/thread/pass-control";
     const headers = {
       Key: credentials.client_id,
       Authorization: `Bearer ${credentials.token}`,
     };
 
     const body = {
-      "entityType": "CASE",
-      "entityId": caseId,
-      "participantId": "Sprinklr"
-  }
+      entityType: "CASE",
+      entityId: caseId,
+      participantId: "Sprinklr",
+    };
 
     const response = await axios.post(url_sprinklr, body, { headers });
-    console.log(new Date(),`Resposta pass control: ${JSON.stringify(response.data)}`)
+    console.log(
+      new Date(),
+      `Resposta pass control: ${JSON.stringify(response.data)}`
+    );
     return response.data;
   } catch (error) {
     if (error.response) {
       console.log(error.response.data);
       return error.response.data;
     } else if (error.request) {
-      console.log('Sem resposta do servidor:', error.request);
-      return { error: 'Sem resposta do servidor' };
+      console.log("Sem resposta do servidor:", error.request);
+      return { error: "Sem resposta do servidor" };
     } else {
-      console.log('Erro ao processar requisição:', error.message);
-      return { error: 'Erro ao processar requisição' };
+      console.log("Erro ao processar requisição:", error.message);
+      return { error: "Erro ao processar requisição" };
     }
   }
 };
-
-
 
 module.exports = {
   sessionGenerator,

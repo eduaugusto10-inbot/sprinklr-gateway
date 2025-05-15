@@ -21,7 +21,7 @@ class CredentialsService {
 
     let config = {
       method: "post",
-      url: "https://api2.sprinklr.com/oauth/token",
+      url: "https://api3.sprinklr.com/oauth/token",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },

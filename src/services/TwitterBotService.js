@@ -10,7 +10,7 @@ class TwitterBotService {
     credentials = credentials[0];
 
     console.log(JSON.stringify(payloadSprinklr));
-    const url_sprinklr = "https://api2.sprinklr.com/api/v2/publishing/message";
+    const url_sprinklr = "https://api3.sprinklr.com/api/v2/publishing/message";
     const headers = {
       headers: {
         Key: credentials.client_id,
@@ -42,8 +42,9 @@ class TwitterBotService {
   async postMessage(body, respInbot, messageAssociationChange) {
     const sprinklrInstance = new SprinklrInstanceDAO();
 
-    const regex = /^([^_]*)/gi 
-    const respRegex = messageAssociationChange.payload.uCase.conversationId.match(regex);
+    const regex = /^([^_]*)/gi;
+    const respRegex =
+      messageAssociationChange.payload.uCase.conversationId.match(regex);
     const channelID = respRegex;
 
     let instance = await sprinklrInstance.getInstanceByChannelID(channelID); //dados retorno do banco
@@ -99,10 +100,20 @@ class TwitterBotService {
           quickReplies: buttons,
         };
       }
-      if(payloadSprinklr.content.text.includes("[CMD:HANDOVER]")){
-        payloadSprinklr.content.text = bloco.message.replace("[CMD:HANDOVER]", "");
-        const changeParticipantControl= await utils.changeParticipantControl(messageAssociationChange.payload.uCase.id);
-        console.log(new Date(), `Change participant control: ${JSON.stringify(changeParticipantControl)}`)
+      if (payloadSprinklr.content.text.includes("[CMD:HANDOVER]")) {
+        payloadSprinklr.content.text = bloco.message.replace(
+          "[CMD:HANDOVER]",
+          ""
+        );
+        const changeParticipantControl = await utils.changeParticipantControl(
+          messageAssociationChange.payload.uCase.id
+        );
+        console.log(
+          new Date(),
+          `Change participant control: ${JSON.stringify(
+            changeParticipantControl
+          )}`
+        );
       }
       console.log(`Envio do texto: ${JSON.stringify(payloadSprinklr)}`);
       this.sendMessage(payloadSprinklr);
@@ -127,7 +138,7 @@ class TwitterBotService {
         Authorization: `Bearer ${credentials.token}`,
       },
     };
-    const url_sprinklr = "https://api2.sprinklr.com/api/v2/publishing/message";
+    const url_sprinklr = "https://api3.sprinklr.com/api/v2/publishing/message";
     try {
       axios
         .post(url_sprinklr, payloadSprinklr, headers)
