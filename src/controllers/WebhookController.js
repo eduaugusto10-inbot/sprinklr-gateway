@@ -15,11 +15,10 @@ class WebhookController {
 
     try {
       switch (channelType) {
-        // case "TWITTER":
-        // console.log(new Date(), `Rede social: ${JSON.stringify(req.body)}`);
-        // if (req.body.payload?.receiverProfile)
-        //  twitterService.getMessage(req.body);
-        //break;
+        case "TWITTER":
+          if (req.body.payload?.receiverProfile)
+            twitterService.getMessage(req.body);
+          break;
         case "INSTAGRAM":
           instagramService.getMessage(req.body);
           break;
