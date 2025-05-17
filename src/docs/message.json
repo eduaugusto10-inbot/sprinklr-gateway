@@ -247,5 +247,85 @@
       "channelId": "1484616750549319682",
       "screenName": "Eduardo Augusto"
     }
+  },
+  {
+    // Payload de 2025-05-17
+    "id": "682798d5389f03113f7017a4",
+    "type": "message.association.change",
+    "payload": {
+      "uCase": {
+        "id": "68278e74389f03113f9237f7",
+        "caseNumber": 4322723,
+        "subject": "#4322723 Instagram oi",
+        "description": "oi",
+        "version": 14,
+        "status": "Novo",
+        "priority": "Média",
+        "externalCaseInfo": { "externalCases": [] },
+        "workflow": {
+          "customProperties": {
+            "_c_62a780173ce0ae09156889ad": ["Não"],
+            "61cc94b2163e057edf55532f": ["Neutral"],
+            "_c_664b68b6b6670d044853f5b3": ["1747422836325"],
+            "spr_uc_predicted_csat_rating": ["51"],
+            "61ce1f6036098d1126e56717": ["Yes"],
+            "61cc94b2163e057edf5552dc": ["No"],
+            "61cc94a6163e057edf554980": ["No"],
+            "61ce1f5f36098d1126e566de": ["Instagram"],
+            "5bd7658ae4b068c9e06a5bbf": ["Sim"],
+            "61ce1f6036098d1126e5673b": ["Social"],
+            "spr_uc_priority": ["Média"],
+            "61cc94b2163e057edf5552d3": ["No"],
+            "61cc94b1163e057edf5551e8": ["Privada"],
+            "61ce1f5f36098d1126e5670e": ["No"],
+            "5f885749d61f971e1496c1b5": ["Organic"],
+            "5be1ecb7e4b05c4fbe1f8c23": ["Operador"],
+            "5a576aeee4b06b5737014d86": ["Privada"],
+            "61cc94b2163e057edf555318": ["Não Aplicável"],
+            "_c_669011f5cdcff46b5e49c7ba": ["Média"],
+            "61cc9497163e057edf553b87": ["Neutro"],
+            "5f9c4c29ff7313172751af27": ["Published"],
+            "_c_65ba49ecda2a1a0e4b13f745": ["1747422836325"],
+            "5e2b3115535c791320eed210": ["Bot"],
+            "61cc94b2163e057edf5552c1": ["Public", "Private"],
+            "spr_uc_status": ["Novo"],
+            "spr_uc_initial_csat_rating": ["51"],
+            "5a576a79e4b06b5737014249": ["Instagram"]
+          },
+          "queues": [
+            { "queueId": 101177, "assignmentTime": 1747422836326 },
+            { "queueId": 101157, "assignmentTime": 1747422836420 },
+            { "queueId": 101183, "assignmentTime": 1747425493634 }
+          ]
+        },
+        "channelCustomProperties": [],
+        "contact": {
+          "id": "INSTAGRAM_865724852418196",
+          "name": "_mandy.silva",
+          "channelType": "INSTAGRAM",
+          "channelId": "865724852418196",
+          "fromSnUserId": "865724852418196"
+        },
+        "createdTime": 1747422836326,
+        "modifiedTime": 1747425493635,
+        "firstMessageId": "ACCOUNT_1820327_1747422827000_INSTAGRAM_320_aWdfZAG1faXRlbToxOklHTWVzc2FnZAUlEOjE3ODQxNDYxNDMwNTE3MjM1OjM0MDI4MjM2Njg0MTcxMDMwMTI0NDI1OTg3ODc2ODY5MTQ0NjgzNzozMjIzNDI2MTY3ODk1ODkxNTYzMjg1NzU2NDg5MjM2NDgwMAZDZD",
+        "sentiment": 0,
+        "latestProfileMessageAssociatedTime": 1747425488397,
+        "conversationId": "aWdfZAG06MTpJR01lc3NhZA2VUaHJlYWQ6MTc4NDE0NjE0MzA1MTcyMzU6MzQwMjgyMzY2ODQxNzEwMzAxMjQ0MjU5ODc4NzY4NjkxNDQ2ODM3",
+        "firstMessageAssociatedTime": 1747422827000,
+        "latestMessageAssociatedTime": 1747425488397,
+        "totalProcessingClockTime": 0,
+        "allEngagedUsersList": [],
+        "associatedFanMessageCount": 4,
+        "associatedBrandMessageCount": 0,
+        "associatedUserBrandMessageCount": 0,
+        "deleted": false
+      },
+      "associatedMessageIds": [
+        "ACCOUNT_1820327_1747425488397_INSTAGRAM_320_aWdfZAG1faXRlbToxOklHTWVzc2FnZAUlEOjE3ODQxNDYxNDMwNTE3MjM1OjM0MDI4MjM2Njg0MTcxMDMwMTI0NDI1OTg3ODc2ODY5MTQ0NjgzNzozMjIzNDMxMDc3MjM0Nzk2MzE1NTM5MDk3MDE5Nzk2Njg0OAZDZD"
+      ]
+    },
+    "eventTime": 1747425493638,
+    "subscriptionDetails": { "subscriptionId": "682660641da63e58eba4f42a" }
   }
 ]
