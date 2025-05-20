@@ -9,7 +9,10 @@ class WebhookController {
     );
     const channelType = req.body?.payload?.uCase?.contact?.channelType
       ? req.body.payload.uCase.contact.channelType
-      : "";
+      : req?.body?.payload?.contact?.channelType;
+    if (!channelType) {
+      return;
+    }
     const twitterService = new TwitterService();
     const instagramService = new InstagramService();
 
