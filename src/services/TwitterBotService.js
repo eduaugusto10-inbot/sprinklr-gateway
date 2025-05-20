@@ -44,7 +44,7 @@ class TwitterBotService {
 
     const regex = /^([^_]*)/gi;
     const respRegex =
-      messageAssociationChange.payload.uCase.conversationId.match(regex);
+      messageAssociationChange.payload.conversationId.match(regex);
     const channelID = respRegex;
 
     let instance = await sprinklrInstance.getInstanceByChannelID(channelID); //dados retorno do banco
@@ -106,7 +106,7 @@ class TwitterBotService {
           ""
         );
         const changeParticipantControl = await utils.changeParticipantControl(
-          messageAssociationChange.payload.uCase.id
+          messageAssociationChange.payload.id
         );
         console.log(
           new Date(),

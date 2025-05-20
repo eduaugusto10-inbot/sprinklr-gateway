@@ -7,9 +7,7 @@ class WebhookController {
       new Date(),
       `[getMessage] Rede social: ${JSON.stringify(req.body)}`
     );
-    const channelType = req.body?.payload?.uCase?.contact?.channelType
-      ? req.body.payload.uCase.contact.channelType
-      : req?.body?.payload?.contact?.channelType;
+    const channelType = req?.body?.payload?.contact?.channelType || "";
     if (!channelType) {
       return;
     }

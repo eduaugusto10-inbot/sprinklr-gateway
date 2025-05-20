@@ -12,8 +12,8 @@ class InstagramService {
     const sprinklrState = new SprinklrStateDAO();
     const instagramBotService = new InstagramBotService();
     const lastMessage = await utils.lastMessage(
-      body.payload.uCase.firstMessageId,
-      body.payload.uCase.latestMessageAssociatedTime
+      body?.payload?.firstMessageId,
+      body?.payload?.latestMessageAssociatedTime
     );
     console.log(
       new Date(),
@@ -33,7 +33,7 @@ class InstagramService {
     }
     let checkControl = [];
     if (body.type == "message.association.change") {
-      checkControl = await utils.checkControl(body.payload.uCase.id);
+      checkControl = await utils.checkControl(body.payload.id);
       if (
         checkControl.data.controllingParticipantId != instance.participant_id
       ) {
@@ -182,8 +182,8 @@ class InstagramService {
   findChannelId(userData) {
     if (userData?.payload?.senderProfile) {
       return userData.payload.senderProfile.channelId;
-    } else if (userData?.payload?.uCase?.contact?.channelId) {
-      return userData.payload.uCase.contact.channelId;
+    } else if (userData?.payload?.contact?.channelId) {
+      return userData.payload.contact.channelId;
     }
     return null;
   }

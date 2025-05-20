@@ -104,7 +104,7 @@ class InstagramBotService {
         if (bloco.message.includes("[CMD:HANDOVER]")) {
           //payloadSprinklr.content.text = bloco.message.replace("[CMD:HANDOVER]", "");
           const changeParticipantControl = await utils.changeParticipantControl(
-            messageAssociationChange.payload.uCase.id
+            messageAssociationChange.payload.id
           );
           //console.log(new Date(), `Change participant control: ${JSON.stringify(changeParticipantControl)}`)
         }
