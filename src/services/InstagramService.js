@@ -8,6 +8,10 @@ const inbotService = require("./InbotService");
 // Se não houver receiverProfile a comunicação realizada não foi via messages, tenho que ignorar
 class InstagramService {
   async getMessage(body) {
+    console.log(
+      new Date(),
+      `[getMessage] Rede social: ${JSON.stringify(body)}`
+    );
     const sprinklrInstance = new SprinklrInstanceDAO();
     const sprinklrState = new SprinklrStateDAO();
     const instagramBotService = new InstagramBotService();
