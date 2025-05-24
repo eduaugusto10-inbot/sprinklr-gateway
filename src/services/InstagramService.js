@@ -28,7 +28,8 @@ class InstagramService {
     }
 
     const channelID =
-      body?.payload?.channelId || lastMessage?.receiverProfile?.channelId;
+      body?.payload?.receiverProfile?.channelId ||
+      lastMessage?.receiverProfile?.channelId;
     let instance = await sprinklrInstance.getInstanceByChannelID(channelID); //dados retorno do banco
     instance = instance[0];
     console.log(new Date(), `Instance data ${JSON.stringify(instance)}`);
