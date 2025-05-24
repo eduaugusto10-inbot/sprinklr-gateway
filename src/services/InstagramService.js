@@ -12,6 +12,107 @@ class InstagramService {
       new Date(),
       `[getMessage] Rede social: ${JSON.stringify(body)}`
     );
+    body.type == "message.created"
+      ? this.getMessageCreate(body)
+      : this.getCaseCreate(body);
+  }
+  async getMessageCreate(body) {
+    console.log(
+      new Date(),
+      `[getMessageCreate] Rede social: ${JSON.stringify(body)}`
+    );
+    const sprinklrInstance = new SprinklrInstanceDAO();
+    const sprinklrState = new SprinklrStateDAO();
+    const instagramBotService = new InstagramBotService();
+    const channelID = body?.payload?.receiverProfile?.channelId;
+    let instance = await sprinklrInstance.getInstanceByChannelID(channelID); //dados retorno do banco
+    instance = instance[0];
+    console.log(new Date(), `Instance data ${JSON.stringify(instance)}`);
+    if (instance === undefined) {
+      console.log(new Date(), `Bot ${channelID} não cadastrado`);
+      return "Bot não cadastrado";
+    }
+    let checkControl = [];
+    if (body.type == "message.association.change") {
+      checkControl = await utils.checkControl(body.payload.id);
+      if (
+        checkControl.data.controllingParticipantId != instance.participant_id
+      ) {
+        return "Conversa esta com outro participante";
+      }
+    }
+    console.log(
+      new Date(),
+      `Controle participant ${JSON.stringify(checkControl)}`
+    );
+
+    const setVarStr = `full_name=${body.payload.senderProfile.name}`;
+    // Verifica se usuario existe, caso nao cadastra
+    const dbUserState = await sprinklrState.getStateByUserId(
+      body.payload.senderProfile.channelId,
+      instance.bot_id
+    );
+    // console.log(new Date(), `Usuario: ${JSON.stringify(dbUserState)}`)
+    const dbUser = await this.createOrRetrieveState(
+      dbUserState,
+      instance,
+      body
+    );
+    const sessionId = dbUser.session_id;
+    let payloadInbot = {
+      bot_id: instance.bot_id,
+      user_id: body.payload.senderProfile.channelId,
+      bot_server_type: instance.bot_server_type,
+      bot_token: instance.bot_token,
+      channel: "instagram-sprinklr", //body.payload.channelType,
+      setvar: setVarStr,
+      session_id: sessionId,
+      url_webhook: instance.url_webhook,
+    };
+
+    if (utils.isHasOwnProperty(body.payload.content, "text")) {
+      payloadInbot.user_phrase = body.payload.content.text;
+    } else {
+      // Envio de arquivos
+      var data = new FormData();
+      // console.log(new Date(), `Attachment: ${body.payload.content.attachment}`)
+      data.append("file-upload-anexo", body.payload.content.attachment.url);
+      data.append("action", "file-upload");
+      data.append("bot_id", instance.bot_id);
+      data.append("bot_token", instance.bot_token);
+      data.append("mime_type", body.payload.content.attachment.type);
+      data.append("folder", "user-files");
+      data.append("session_id", sessionId);
+      data.append("user_id", body.payload.senderProfile.channelId);
+      data.append("channel", body.payload.channelType + "-sprinklr");
+      data.append("USER_PHONE", body.payload.senderProfile.channelId);
+      const uploadFile = await inbotService.postFile(data);
+      console.log(new Date(), `AFTER_UPLOAD: ${JSON.stringify(uploadFile)}`);
+      if (body.payload.content.attachment.type == "AUDIO") {
+        payloadInbot.user_phrase = await utils.speechToText(uploadFile.url);
+      } else {
+        payloadInbot.user_phrase =
+          "AFTER_UPLOAD " +
+          uploadFile.url +
+          " mime_type=" +
+          body.payload.content.attachment.type;
+      }
+    }
+
+    console.log(payloadInbot);
+    try {
+      await axios.post(instance.url_bot, payloadInbot).then((resp) => {
+        console.log(new Date(), `Inbot: ${JSON.stringify(resp.data)}`);
+        instagramBotService.postMessage(body.payload, resp.data, body);
+      });
+      // console.log(body);
+    } catch (error) {}
+  }
+  async getCaseCreate(body) {
+    console.log(
+      new Date(),
+      `[getCaseCreate] Rede social: ${JSON.stringify(body)}`
+    );
     const sprinklrInstance = new SprinklrInstanceDAO();
     const sprinklrState = new SprinklrStateDAO();
     const instagramBotService = new InstagramBotService();
@@ -27,9 +128,7 @@ class InstagramService {
       return "Nenhuma mensagem para enviar";
     }
 
-    const channelID =
-      body?.payload?.receiverProfile?.channelId ||
-      lastMessage?.receiverProfile?.channelId;
+    const channelID = lastMessage?.receiverProfile?.channelId;
     let instance = await sprinklrInstance.getInstanceByChannelID(channelID); //dados retorno do banco
     instance = instance[0];
     console.log(new Date(), `Instance data ${JSON.stringify(instance)}`);
@@ -113,7 +212,6 @@ class InstagramService {
       // console.log(body);
     } catch (error) {}
   }
-
   async createOrRetrieveState(dbUserState, instance, userData) {
     if (!dbUserState || dbUserState.length === 0) {
       return await this.createNewState(instance, userData);

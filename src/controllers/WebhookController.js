@@ -3,6 +3,10 @@ const { InstagramService } = require("../services/InstagramService");
 
 class WebhookController {
   async getMessage(req, res) {
+    res.send({
+      status: "success",
+      message: "Message received",
+    });
     const channelType =
       req?.body?.payload?.contact?.channelType ||
       req?.body?.payload?.channelType;
@@ -26,11 +30,6 @@ class WebhookController {
       }
     } catch (error) {
       console.log(Date(), `Error: ${error}`);
-    } finally {
-      res.send({
-        status: "success",
-        message: "Message received",
-      });
     }
   }
 }
