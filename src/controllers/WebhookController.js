@@ -3,7 +3,9 @@ const { InstagramService } = require("../services/InstagramService");
 
 class WebhookController {
   async getMessage(req, res) {
-    const channelType = req?.body?.payload?.contact?.channelType || "";
+    const channelType =
+      req?.body?.payload?.contact?.channelType ||
+      req?.body?.payload?.channelType;
     if (!channelType) {
       return;
     }
