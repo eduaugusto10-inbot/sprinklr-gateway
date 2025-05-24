@@ -27,7 +27,8 @@ class InstagramService {
       return "Nenhuma mensagem para enviar";
     }
 
-    const channelID = lastMessage.receiverProfile.channelId;
+    const channelID =
+      lastMessage?.receiverProfile?.channelId || body?.payload?.channelId;
     let instance = await sprinklrInstance.getInstanceByChannelID(channelID); //dados retorno do banco
     instance = instance[0];
     console.log(new Date(), `Instance data ${JSON.stringify(instance)}`);
