@@ -5,7 +5,7 @@ class SprinklrCredentialsDAO {
     return new Promise((resolve, reject) => {
       db.query(
         "SELECT * FROM sprinklr_credentials WHERE client_id = ? ORDER BY id DESC LIMIT 1;",
-        ["sbkfQSxyuyo792YwbMdBFcLNwkUDGJL7d1UmxwohaopXlPaB"],
+        ["LHLaHqJAZPmyqWXGGPhvnyjIN6GlfKECJGazXMYvRou5zwvq"],
         (err, result) => {
           if (err) {
             reject(err);

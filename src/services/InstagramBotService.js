@@ -48,7 +48,7 @@ class InstagramBotService {
     const channelID = body.receiverProfile.channelId;
     let instance = await sprinklrInstance.getInstanceByChannelID(channelID); //dados retorno do banco
     instance = instance[0];
-    console.log(`retorno instance ${JSON.stringify(respInbot)}`);
+    console.log(new Date(), `retorno instance ${JSON.stringify(respInbot)}`);
 
     for (const bloco of respInbot.resp) {
       const quickReply = utils.extractQuickReplies(bloco.message);
