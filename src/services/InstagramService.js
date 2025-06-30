@@ -8,30 +8,24 @@ const inbotService = require("./InbotService");
 // Se não houver receiverProfile a comunicação realizada não foi via messages, tenho que ignorar
 class InstagramService {
   async getMessage(body) {
-    console.log(
-      new Date(),
-      `[getMessage] Rede social: ${JSON.stringify(body)}`
-    );
     body.type == "message.created"
       ? this.getMessageCreate(body)
       : this.getCaseCreate(body);
   }
   async getMessageCreate(body) {
-    console.log(
-      new Date(),
-      `[getMessageCreate] Rede social: ${JSON.stringify(body)}`
-    );
     const sprinklrInstance = new SprinklrInstanceDAO();
     const sprinklrState = new SprinklrStateDAO();
     const instagramBotService = new InstagramBotService();
     const channelID = body?.payload?.receiverProfile?.channelId;
     let instance = await sprinklrInstance.getInstanceByChannelID(channelID); //dados retorno do banco
     instance = instance[0];
-    console.log(new Date(), `Instance data ${JSON.stringify(instance)}`);
     if (instance === undefined) {
-      console.log(new Date(), `Bot ${channelID} não cadastrado`);
       return "Bot não cadastrado";
     }
+    console.log(
+      new Date(),
+      `[getMessageCreate] Rede social: ${JSON.stringify(body)}`
+    );
     let checkControl = [];
     if (body.type == "message.association.change") {
       checkControl = await utils.checkControl(body.payload.id);
@@ -109,10 +103,6 @@ class InstagramService {
     } catch (error) {}
   }
   async getCaseCreate(body) {
-    console.log(
-      new Date(),
-      `[getCaseCreate] Rede social: ${JSON.stringify(body)}`
-    );
     const sprinklrInstance = new SprinklrInstanceDAO();
     const sprinklrState = new SprinklrStateDAO();
     const instagramBotService = new InstagramBotService();
@@ -120,14 +110,13 @@ class InstagramService {
       body?.payload?.firstMessageId,
       body?.payload?.latestMessageAssociatedTime
     );
-    console.log(
-      new Date(),
-      `[getMessage]Last message: ${JSON.stringify(lastMessage)}`
-    );
     if (lastMessage == undefined) {
       return "Nenhuma mensagem para enviar";
     }
-
+    console.log(
+      new Date(),
+      `[getCaseCreate] Rede social: ${JSON.stringify(body)}`
+    );
     const channelID = lastMessage?.receiverProfile?.channelId;
     let instance = await sprinklrInstance.getInstanceByChannelID(channelID); //dados retorno do banco
     instance = instance[0];
