@@ -102,11 +102,19 @@ class InstagramBotService {
           " \n" +
           (bloco.media_type === "video" ? bloco.media : "");
         if (bloco.message.includes("[CMD:HANDOVER]")) {
-          //payloadSprinklr.content.text = bloco.message.replace("[CMD:HANDOVER]", "");
+          payloadSprinklr.content.text = bloco.message.replace(
+            "[CMD:HANDOVER]",
+            ""
+          );
           const changeParticipantControl = await utils.changeParticipantControl(
             messageAssociationChange.payload.id
           );
-          //console.log(new Date(), `Change participant control: ${JSON.stringify(changeParticipantControl)}`)
+          console.log(
+            new Date(),
+            `Change participant control: ${JSON.stringify(
+              changeParticipantControl
+            )}`
+          );
         }
       }
       console.log(`Envio do texto: ${JSON.stringify(payloadSprinklr)}`);
