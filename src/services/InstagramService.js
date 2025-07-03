@@ -220,6 +220,7 @@ class InstagramService {
     }
     const conversationId = userData.payload.conversationId;
     const messageId = userData.payload.messageId;
+    const caseId = userData.payload.caseNumber;
     try {
       const user = await sprinklrState.createState(
         sessionId,
@@ -228,7 +229,8 @@ class InstagramService {
         channelId,
         0,
         conversationId,
-        messageId
+        messageId,
+        caseId
       );
       // console.log(new Date(), `Usuario criado: ${JSON.stringify(user)}`)
       return user;
