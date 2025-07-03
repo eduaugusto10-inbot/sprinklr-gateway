@@ -97,6 +97,15 @@ function attachmentCreate(orig) {
 }
 
 function extractQuickReplies(orig) {
+  // Verifica se o parâmetro orig é válido
+  if (!orig || typeof orig !== "string") {
+    console.log(
+      new Date(),
+      `: extractQuickReplies recebeu um parâmetro inválido: ${orig}`
+    );
+    return [orig || "", []];
+  }
+
   let match = orig.match(
     /^(?<main>.*)\[quick_replies\](?<quickreplies>.*?)\[\/quick_replies\](?<rest>.*)$/s
   );

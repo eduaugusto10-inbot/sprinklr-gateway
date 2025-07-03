@@ -51,6 +51,15 @@ class InstagramBotService {
     console.log(new Date(), `retorno instance ${JSON.stringify(respInbot)}`);
 
     for (const bloco of respInbot.resp) {
+      // Verifica se bloco.message está definido
+      if (!bloco || !bloco.message) {
+        console.log(
+          new Date(),
+          `: Bloco inválido encontrado: ${JSON.stringify(bloco)}`
+        );
+        continue; // Pula para o próximo bloco
+      }
+
       const quickReply = utils.extractQuickReplies(bloco.message);
 
       let buttons = [];
@@ -98,10 +107,10 @@ class InstagramBotService {
         };
       } else {
         payloadSprinklr.content.text =
-          bloco.message +
+          (bloco.message || "") +
           " \n" +
           (bloco.media_type === "video" ? bloco.media : "");
-        if (bloco.message.includes("[CMD:HANDOVER]")) {
+        if (bloco.message && bloco.message.includes("[CMD:HANDOVER]")) {
           payloadSprinklr.content.text = bloco.message.replace(
             "[CMD:HANDOVER]",
             ""
