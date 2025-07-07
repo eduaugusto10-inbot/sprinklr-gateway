@@ -47,7 +47,12 @@ class InstagramBotService {
     const sprinklrInstance = new SprinklrInstanceDAO();
     const channelID = body.receiverProfile.channelId;
     let instance = await sprinklrInstance.getInstanceByChannelID(channelID); //dados retorno do banco
+    if (Array.isArray(instance) && instance.length < 1) {
+      return;
+    }
+    console.log(new Date(), `instance ${JSON.stringify(instance)}`);
     instance = instance[0];
+    console.log(new Date(), `instance ${JSON.stringify(instance)}`);
     console.log(new Date(), `retorno instance ${JSON.stringify(respInbot)}`);
 
     for (const bloco of respInbot.resp) {
@@ -57,7 +62,7 @@ class InstagramBotService {
           new Date(),
           `: Bloco inválido encontrado: ${JSON.stringify(bloco)}`
         );
-        continue; // Pula para o próximo bloco
+        continue;
       }
 
       const quickReply = utils.extractQuickReplies(bloco.message);

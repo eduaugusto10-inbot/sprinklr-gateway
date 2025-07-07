@@ -46,12 +46,16 @@ class InstagramService {
       body.payload.senderProfile.channelId,
       instance.bot_id
     );
-    // console.log(new Date(), `Usuario: ${JSON.stringify(dbUserState)}`)
+    console.log(new Date(), `dbUserState ${JSON.stringify(dbUserState)}`);
+    if (dbUserState.send_to_inchat == 1) {
+      return;
+    }
     const dbUser = await this.createOrRetrieveState(
       dbUserState,
       instance,
       body
     );
+    // console.log(new Date(), `Usuario: ${JSON.stringify(dbUserState)}`)
     const sessionId = dbUser.session_id;
     let payloadInbot = {
       bot_id: instance.bot_id,
@@ -117,12 +121,13 @@ class InstagramService {
       new Date(),
       `[getCaseCreate] Rede social: ${JSON.stringify(body)}`
     );
-    const channelID = lastMessage?.receiverProfile?.channelId;
-    let instance = await sprinklrInstance.getInstanceByChannelID(channelID); //dados retorno do banco
+    const accountId = lastMessage?.sourceId;
+    console.log(new Date(), `ChannelID: ${JSON.stringify(lastMessage)}`);
+    let instance = await sprinklrInstance.getInstanceBySourceID(accountId); //dados retorno do banco
     instance = instance[0];
     console.log(new Date(), `Instance data ${JSON.stringify(instance)}`);
     if (instance === undefined) {
-      console.log(new Date(), `Bot ${channelID} não cadastrado`);
+      console.log(new Date(), `Bot ${accountId} não cadastrado`);
       return "Bot não cadastrado";
     }
     let checkControl = [];
@@ -219,7 +224,7 @@ class InstagramService {
       return;
     }
     const conversationId = userData.payload.conversationId;
-    const messageId = userData.payload.messageId;
+    const messageId = userData.payload.firstMessageId;
     const caseId = userData.payload.caseNumber;
     try {
       const user = await sprinklrState.createState(

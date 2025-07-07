@@ -16,6 +16,21 @@ class SprinklrInstanceDAO {
       );
     });
   }
+  getInstanceBySourceID(accountId) {
+    return new Promise((resolve, reject) => {
+      db.query(
+        "SELECT * FROM sprinklr_bots WHERE account_id = ?",
+        [accountId],
+        (err, result) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(result);
+          }
+        }
+      );
+    });
+  }
   getInstanceByBotID(bot_id) {
     return new Promise((resolve, reject) => {
       db.query(
