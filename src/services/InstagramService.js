@@ -46,7 +46,7 @@ class InstagramService {
       body.payload.senderProfile.channelId,
       instance.bot_id
     );
-    if (dbUserState.send_to_inchat == 1) {
+    if (dbUserState && dbUserState.send_to_inchat == 1) {
       return;
     }
     const dbUser = await this.createOrRetrieveState(
