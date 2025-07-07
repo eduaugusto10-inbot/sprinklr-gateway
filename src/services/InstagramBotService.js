@@ -1,5 +1,6 @@
 const axios = require("axios");
 const { SprinklrInstanceDAO } = require("../models/SprinklrInstanceDAO");
+const { SprinklrStateDAO } = require("../models/SprinklrStateDAO");
 const utils = require("../utils");
 const Promise = require("bluebird");
 const { SprinklrCredentialsDAO } = require("../models/SprinklrCredentialsDAO");
@@ -45,15 +46,13 @@ class InstagramBotService {
 
   async postMessage(body, respInbot, messageAssociationChange) {
     const sprinklrInstance = new SprinklrInstanceDAO();
+    const sprinklrStateDAO = new SprinklrStateDAO();
     const channelID = body.receiverProfile.channelId;
     let instance = await sprinklrInstance.getInstanceByChannelID(channelID); //dados retorno do banco
     if (Array.isArray(instance) && instance.length < 1) {
       return;
     }
-    console.log(new Date(), `instance ${JSON.stringify(instance)}`);
     instance = instance[0];
-    console.log(new Date(), `instance ${JSON.stringify(instance)}`);
-    console.log(new Date(), `retorno instance ${JSON.stringify(respInbot)}`);
 
     for (const bloco of respInbot.resp) {
       // Verifica se bloco.message está definido
@@ -119,6 +118,15 @@ class InstagramBotService {
           payloadSprinklr.content.text = bloco.message.replace(
             "[CMD:HANDOVER]",
             ""
+          );
+          console.log(
+            new Date(),
+            `body.payload ${JSON.stringify(body.senderProfile.channelId)}`
+          );
+          await sprinklrStateDAO.updateEscalationUser(
+            1,
+            body.senderProfile.channelId,
+            instance.bot_id
           );
           const changeParticipantControl = await utils.changeParticipantControl(
             messageAssociationChange.payload.id

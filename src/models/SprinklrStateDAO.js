@@ -66,11 +66,27 @@ class SprinklrStateDAO {
 
   updateUserState(userId, botId) {
     const now = new Date();
-    console.log("aqui");
     return new Promise((resolve, reject) => {
       db.query(
         "UPDATE sprinklr_state SET last_interaction = ? WHERE user_name=? AND bot_id=?",
         [now, userId, botId],
+        (err, result) => {
+          if (err) {
+            console.error(err);
+            reject(err);
+          } else {
+            resolve();
+          }
+        }
+      );
+    });
+  }
+  updateEscalationUser(escalation, userId, botId) {
+    const now = new Date();
+    return new Promise((resolve, reject) => {
+      db.query(
+        "UPDATE sprinklr_state SET send_to_inchat = ?, last_interaction = ? WHERE user_name=? AND bot_id=?",
+        [escalation, now, userId, botId],
         (err, result) => {
           if (err) {
             console.error(err);

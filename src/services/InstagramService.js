@@ -46,7 +46,6 @@ class InstagramService {
       body.payload.senderProfile.channelId,
       instance.bot_id
     );
-    console.log(new Date(), `dbUserState ${JSON.stringify(dbUserState)}`);
     if (dbUserState.send_to_inchat == 1) {
       return;
     }
@@ -55,7 +54,6 @@ class InstagramService {
       instance,
       body
     );
-    // console.log(new Date(), `Usuario: ${JSON.stringify(dbUserState)}`)
     const sessionId = dbUser.session_id;
     let payloadInbot = {
       bot_id: instance.bot_id,
