@@ -46,6 +46,18 @@ class SprinklrInstanceDAO {
       );
     });
   }
+
+  getAllInstances() {
+    return new Promise((resolve, reject) => {
+      db.query("SELECT * FROM sprinklr_bots", [], (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(result);
+        }
+      });
+    });
+  }
 }
 
 module.exports = {
